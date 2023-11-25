@@ -1,0 +1,57 @@
+[gd_scene load_steps=9 format=3 uid="uid://cuc3wniwp88mv"]
+
+[ext_resource type="Script" path="res://scripts/cheese_script.gd" id="1_17ik0"]
+[ext_resource type="Texture2D" uid="uid://dy0fbylboorxh" path="res://assets/graphics/cheese.png" id="1_e51ik"]
+[ext_resource type="Texture2D" uid="uid://b5v76jyemkrpk" path="res://assets/graphics/eaten_cheese_001.png" id="2_226sw"]
+[ext_resource type="Texture2D" uid="uid://dad4sa7qaxo58" path="res://assets/graphics/eaten_cheese_002.png" id="3_hwb5j"]
+[ext_resource type="Texture2D" uid="uid://cf6wp1qxrgtlb" path="res://assets/graphics/eaten_cheese_003.png" id="4_dmpvb"]
+[ext_resource type="Texture2D" uid="uid://dx737lhsfxl60" path="res://assets/graphics/cheese_all_gone.png" id="5_luar2"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_i4kva"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_e51ik")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_226sw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_hwb5j")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_dmpvb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_luar2")
+}],
+"loop": true,
+"name": &"cheese_being_eaten",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_e51ik")
+}],
+"loop": true,
+"name": &"cheese_intact",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u8q5y"]
+size = Vector2(32, 32)
+
+[node name="Cheese" type="Area2D"]
+collision_mask = 2
+script = ExtResource("1_17ik0")
+metadata/_edit_group_ = true
+
+[node name="CheeseAnims" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.35, 0.35)
+sprite_frames = SubResource("SpriteFrames_i4kva")
+animation = &"cheese_being_eaten"
+
+[node name="CheeseCollision" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_u8q5y")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

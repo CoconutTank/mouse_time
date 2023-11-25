@@ -1,0 +1,38 @@
+[gd_scene load_steps=6 format=3 uid="uid://18p4x6egilxc"]
+
+[ext_resource type="Script" path="res://scripts/main_script.gd" id="1_idi3s"]
+[ext_resource type="PackedScene" uid="uid://cuc3wniwp88mv" path="res://nodes/cheese.tscn" id="2_7i27o"]
+[ext_resource type="PackedScene" uid="uid://d0wmiadj8rkxa" path="res://nodes/light_cheese.tscn" id="2_nrsgs"]
+[ext_resource type="PackedScene" uid="uid://cagcnvjsihqp4" path="res://scenes/hud_scene.tscn" id="2_qshda"]
+[ext_resource type="PackedScene" uid="uid://cxvlnyvc2y1s4" path="res://nodes/player_mouse.tscn" id="3_s77hs"]
+
+[node name="Main" type="Node"]
+script = ExtResource("1_idi3s")
+light_cheese_blueprint = ExtResource("2_nrsgs")
+
+[node name="Background" type="ColorRect" parent="."]
+offset_right = 1152.0
+offset_bottom = 648.0
+color = Color(0.27451, 0.678431, 0.435294, 1)
+
+[node name="PerSecondTimer" type="Timer" parent="."]
+
+[node name="LightCheeseSpawnTimer" type="Timer" parent="."]
+wait_time = 3.0
+
+[node name="LightCheeseSpawnTimer2" type="Timer" parent="."]
+wait_time = 5.0
+
+[node name="HUD" parent="." instance=ExtResource("2_qshda")]
+
+[node name="CheeseCursor" parent="." instance=ExtResource("2_7i27o")]
+
+[node name="PlayerMouse" parent="." instance=ExtResource("3_s77hs")]
+
+[connection signal="timeout" from="PerSecondTimer" to="." method="_on_per_second_timer_timeout"]
+[connection signal="timeout" from="LightCheeseSpawnTimer" to="." method="_on_light_cheese_spawn_timer_timeout"]
+[connection signal="timeout" from="LightCheeseSpawnTimer2" to="." method="_on_light_cheese_spawn_timer_timeout"]
+[connection signal="start_game" from="HUD" to="." method="new_game"]
+[connection signal="cheese_eaten" from="CheeseCursor" to="." method="_on_cheese_cursor_cheese_eaten"]
+[connection signal="cheese_eaten" from="CheeseCursor" to="PlayerMouse" method="_on_cheese_cursor_cheese_eaten"]
+[connection signal="mouse_goes_to_sleep" from="PlayerMouse" to="." method="_on_player_mouse_mouse_goes_to_sleep"]

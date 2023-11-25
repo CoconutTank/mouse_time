@@ -1,0 +1,130 @@
+[gd_scene load_steps=2 format=3 uid="uid://cagcnvjsihqp4"]
+
+[ext_resource type="Script" path="res://scripts/hud_script.gd" id="1_oq0hi"]
+
+[node name="HUD" type="CanvasLayer"]
+script = ExtResource("1_oq0hi")
+game_title = "Mouse Time"
+
+[node name="StartButton" type="Button" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -57.0
+offset_top = -35.5
+offset_right = 57.0
+offset_bottom = 35.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 45
+text = "Start"
+
+[node name="HowToPlayButton" type="Button" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -144.0
+offset_top = 60.0
+offset_right = 149.0
+offset_bottom = 140.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 45
+text = "How To Play?"
+
+[node name="MessageLabel" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -216.0
+offset_top = -156.0
+offset_right = 216.0
+offset_bottom = -65.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 64
+text = "Mouse Time"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="TimeLabel" type="Label" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -96.0
+offset_top = -1.0
+offset_bottom = 47.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 32
+text = "Time:"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="TimeCounter" type="Label" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_top = -1.0
+offset_right = 40.0
+offset_bottom = 47.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 32
+text = "0
+"
+autowrap_mode = 2
+
+[node name="CheeseEatenLabel" type="Label" parent="."]
+offset_right = 199.0
+offset_bottom = 48.0
+theme_override_font_sizes/font_size = 32
+text = "Yum Cheese:"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="CheeseEatenCounter" type="Label" parent="."]
+offset_left = 208.0
+offset_right = 248.0
+offset_bottom = 48.0
+theme_override_font_sizes/font_size = 32
+text = "0"
+autowrap_mode = 2
+
+[node name="MouseSpeedLabel" type="Label" parent="."]
+offset_left = 824.0
+offset_top = -1.0
+offset_right = 1032.0
+offset_bottom = 47.0
+theme_override_font_sizes/font_size = 32
+text = "Zoom Factor:"
+autowrap_mode = 2
+
+[node name="MouseSpeedDisplay" type="Label" parent="."]
+offset_left = 1032.0
+offset_top = -1.0
+offset_right = 1064.0
+offset_bottom = 47.0
+theme_override_font_sizes/font_size = 32
+text = "0"
+autowrap_mode = 2
+
+[node name="HowToPlayText" type="Label" parent="."]
+offset_left = 32.0
+offset_top = 16.0
+offset_right = 1128.0
+offset_bottom = 384.0
+theme_override_font_sizes/font_size = 35
+text = "Direct the mouse to eat as much cheese as possible!
+Your (computer) mouse will move a big cheese that's constantly luring the mouse over. When the mouse eats the big cheese, they'll be too sleepy to continue and the game ends.
+The mouse will move faster over time and each time it eats a cheese!"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="HowToPlayButton" to="." method="_on_how_to_play_button_pressed"]
