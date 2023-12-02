@@ -3,6 +3,7 @@ extends CanvasLayer
 signal start_game
 
 @export var game_title : String
+@export var stow_exit_button = false
 
 var showing_how_to_play = false
 
@@ -23,6 +24,8 @@ func _ready():
 		$MouseSpeedDisplay		
 	]
 	$HowToPlayText.hide()
+	if (stow_exit_button):
+		$ExitGameButton.hide()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -69,7 +72,8 @@ func hide_message():
 func show_buttons():
 	$StartButton.show()
 	$HowToPlayButton.show()
-	$ExitGameButton.show()
+	if (!stow_exit_button):
+		$ExitGameButton.show()
 
 
 func show_how_to_play():
@@ -84,7 +88,8 @@ func show_how_to_play():
 func close_how_to_play():
 	$HowToPlayText.hide()
 	$StartButton.show()
-	$ExitGameButton.show()
+	if (!stow_exit_button):
+		$ExitGameButton.show()
 	display_game_ui(true)
 	$HowToPlayButton.text = how_to_play_button_text
 	showing_how_to_play = false
