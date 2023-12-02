@@ -7,10 +7,21 @@ signal start_game
 var showing_how_to_play = false
 
 var how_to_play_button_text = "How To Play"
-var how_to_play_button_close_text = "Close"
+var how_to_play_button_close_text = "Return"
+
+var game_ui_components = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	game_ui_components = [
+		$MessageLabel,
+		$TimeLabel,
+		$TimeCounter,
+		$CheeseEatenLabel,
+		$CheeseEatenCounter,
+		$MouseSpeedLabel,
+		$MouseSpeedDisplay		
+	]
 	$HowToPlayText.hide()
 
 
@@ -22,6 +33,8 @@ func _process(delta):
 func _on_start_button_pressed():
 	$StartButton.hide()
 	$HowToPlayButton.hide()
+	$ExitGameButton.hide()
+	display_game_ui(true)
 	start_game.emit()
 
 
@@ -56,11 +69,13 @@ func hide_message():
 func show_buttons():
 	$StartButton.show()
 	$HowToPlayButton.show()
+	$ExitGameButton.show()
 
 
 func show_how_to_play():
 	$StartButton.hide()
-	display_top_ui(false)
+	$ExitGameButton.hide()
+	display_game_ui(false)
 	$HowToPlayText.show()
 	$HowToPlayButton.text = how_to_play_button_close_text
 	showing_how_to_play = true
@@ -69,29 +84,21 @@ func show_how_to_play():
 func close_how_to_play():
 	$HowToPlayText.hide()
 	$StartButton.show()
-	display_top_ui(true)
+	$ExitGameButton.show()
+	display_game_ui(true)
 	$HowToPlayButton.text = how_to_play_button_text
 	showing_how_to_play = false
 
 
-func display_top_ui(show : bool):
-	if (show):
-		$MessageLabel.show()
-		$TimeLabel.show()
-		$TimeCounter.show()
-		$CheeseEatenLabel.show()
-		$CheeseEatenCounter.show()
-		$MouseSpeedLabel.show()
-		$MouseSpeedDisplay.show()
+# Use this function to toggle whether or not the normal game UI is visible.
+func display_game_ui(showUi : bool):
+	if (showUi):
+		for component in game_ui_components:
+			component.show()
 	else:
-		$MessageLabel.hide()
-		$TimeLabel.hide()
-		$TimeCounter.hide()
-		$CheeseEatenLabel.hide()
-		$CheeseEatenCounter.hide()
-		$MouseSpeedLabel.hide()
-		$MouseSpeedDisplay.hide()
-		
+		for component in game_ui_components:
+			component.hide()
+
 
 func update_time_counter(time : int):
 	$TimeCounter.text = str(time)
@@ -103,3 +110,7 @@ func update_cheese_counter(cheese : int):
 
 func update_mouse_speed_display(speed : int):
 	$MouseSpeedDisplay.text = str(speed)
+
+
+func _on_exit_game_button_pressed():
+	get_tree().quit()

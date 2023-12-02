@@ -1,0 +1,35 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="Mouse Time"
+config/description="A funny game about a mouse eating cheese. A big cheese is on your (computer) mouse, which you can move about, and the mouse will chase after the big cheese. Eat as much cheese as possible for a high score. Keep in mind that the mouse will get faster over time, and each time it eats a cheese!"
+run/main_scene="res://scenes/main.tscn"
+config/features=PackedStringArray("4.1", "Forward Plus")
+config/icon="res://assets/graphics/mouse_time_icon_256.png"
+config/windows_native_icon="res://assets/graphics/mouse_time_icon_wind.ico"
+
+[display]
+
+window/stretch/mode="canvas_items"
+
+[layer_names]
+
+2d_render/layer_1="Cheese"
+2d_render/layer_2="PlayerMouse"
+2d_render/layer_3="LightCheese"
+2d_physics/layer_1="Cheese"
+2d_physics/layer_2="PlayerMouse"
+2d_physics/layer_3="LightCheese"
+
+[rendering]
+
+renderer/rendering_method="gl_compatibility"

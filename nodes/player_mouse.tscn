@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://cxvlnyvc2y1s4"]
+[gd_scene load_steps=16 format=3 uid="uid://cxvlnyvc2y1s4"]
 
 [ext_resource type="Texture2D" uid="uid://bsrqnmihcve4w" path="res://assets/graphics/mouse_move_001.png" id="1_4ukei"]
 [ext_resource type="Texture2D" uid="uid://463fy2kf2qug" path="res://assets/graphics/mouse_eat_001.png" id="1_8hl4q"]
@@ -9,6 +9,10 @@
 [ext_resource type="Texture2D" uid="uid://bj71gihu8qvd4" path="res://assets/graphics/mouse_still_002.png" id="2_mhf7h"]
 [ext_resource type="Texture2D" uid="uid://bygr57s7gwd7g" path="res://assets/graphics/mouse_sleep_001.png" id="5_jfvj8"]
 [ext_resource type="Texture2D" uid="uid://cc6fmjdbnx4o7" path="res://assets/graphics/mouse_sleep_002.png" id="6_oexyj"]
+[ext_resource type="Texture2D" uid="uid://1xosr2vefejp" path="res://assets/graphics/mouse_sleep_left_001.png" id="8_3vxtt"]
+[ext_resource type="Texture2D" uid="uid://dw2jws0wjo2uu" path="res://assets/graphics/mouse_sleep_left_002.png" id="9_jdspl"]
+[ext_resource type="Texture2D" uid="uid://n1c4qavvk2jw" path="res://assets/graphics/mouse_sleep_right_001.png" id="10_dj0fa"]
+[ext_resource type="Texture2D" uid="uid://ccgddtnbcjc5y" path="res://assets/graphics/mouse_sleep_right_002.png" id="11_7awfe"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_a4ht0"]
 animations = [{
@@ -47,6 +51,28 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": ExtResource("8_3vxtt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_jdspl")
+}],
+"loop": true,
+"name": &"mouse_sleep_left",
+"speed": 0.75
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("10_dj0fa")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_7awfe")
+}],
+"loop": true,
+"name": &"mouse_sleep_right",
+"speed": 0.75
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": ExtResource("1_b5sfi")
 }, {
 "duration": 1.0,
@@ -70,7 +96,7 @@ metadata/_edit_group_ = true
 [node name="PlayerMouseAnims" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_a4ht0")
-animation = &"mouse_sleep"
+animation = &"mouse_eat"
 
 [node name="PlayerMouseCollision" type="CollisionShape2D" parent="."]
 rotation = 1.5708

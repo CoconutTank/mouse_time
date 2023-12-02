@@ -36,6 +36,21 @@ grow_vertical = 2
 theme_override_font_sizes/font_size = 45
 text = "How To Play?"
 
+[node name="ExitGameButton" type="Button" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -120.0
+offset_top = -160.0
+offset_right = 124.0
+offset_bottom = -89.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 45
+text = "Exit Game"
+
 [node name="MessageLabel" type="Label" parent="."]
 anchors_preset = 8
 anchor_left = 0.5
@@ -80,7 +95,8 @@ text = "0
 autowrap_mode = 2
 
 [node name="CheeseEatenLabel" type="Label" parent="."]
-offset_right = 199.0
+offset_left = 8.0
+offset_right = 207.0
 offset_bottom = 48.0
 theme_override_font_sizes/font_size = 32
 text = "Yum Cheese:"
@@ -88,8 +104,8 @@ horizontal_alignment = 1
 autowrap_mode = 2
 
 [node name="CheeseEatenCounter" type="Label" parent="."]
-offset_left = 208.0
-offset_right = 248.0
+offset_left = 216.0
+offset_right = 256.0
 offset_bottom = 48.0
 theme_override_font_sizes/font_size = 32
 text = "0"
@@ -128,3 +144,4 @@ autowrap_mode = 2
 
 [connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="HowToPlayButton" to="." method="_on_how_to_play_button_pressed"]
+[connection signal="pressed" from="ExitGameButton" to="." method="_on_exit_game_button_pressed"]
