@@ -2,15 +2,14 @@ extends Area2D
 
 signal cheese_eaten
 
-# Size of the game window.
-var screen_size
-
 var active = false
+
+var play_area_min = Vector2.ZERO
+var play_area_max = Vector2.INF
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	hide()
-	screen_size = get_viewport_rect().size
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -23,7 +22,7 @@ func _process(delta):
 func _input(event):
 	if active && event is InputEventMouseMotion:
 		position = event.position
-		position = position.clamp(Vector2.ZERO, screen_size)
+		position = position.clamp(play_area_min, play_area_max)
 
 
 # This function is triggered upon an Area2D overlapping this area. In Mouse
@@ -40,6 +39,11 @@ func start(pos):
 	$CheeseAnims.play("cheese_intact")
 	$CheeseCollision.disabled = false
 	active = true
+
+
+func set_play_area(new_play_area_min : Vector2, new_play_area_max : Vector2):
+	play_area_min = new_play_area_min
+	play_area_max = new_play_area_max
 
 
 # Plays the animation for the big cheese being eaten. This function also emits

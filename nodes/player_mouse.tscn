@@ -1,27 +1,25 @@
-[gd_scene load_steps=16 format=3 uid="uid://cxvlnyvc2y1s4"]
+[gd_scene load_steps=14 format=3 uid="uid://cxvlnyvc2y1s4"]
 
-[ext_resource type="Texture2D" uid="uid://bsrqnmihcve4w" path="res://assets/graphics/mouse_move_001.png" id="1_4ukei"]
-[ext_resource type="Texture2D" uid="uid://463fy2kf2qug" path="res://assets/graphics/mouse_eat_001.png" id="1_8hl4q"]
-[ext_resource type="Texture2D" uid="uid://c3kygt876ha6o" path="res://assets/graphics/mouse_still_001.png" id="1_b5sfi"]
 [ext_resource type="Script" path="res://scripts/player_mouse_script.gd" id="1_oi7xx"]
-[ext_resource type="Texture2D" uid="uid://bfhts2020ook" path="res://assets/graphics/mouse_eat_002.png" id="2_0d3em"]
-[ext_resource type="Texture2D" uid="uid://bi48mfg1vmih4" path="res://assets/graphics/mouse_move_002.png" id="2_8k7mi"]
-[ext_resource type="Texture2D" uid="uid://bj71gihu8qvd4" path="res://assets/graphics/mouse_still_002.png" id="2_mhf7h"]
-[ext_resource type="Texture2D" uid="uid://bygr57s7gwd7g" path="res://assets/graphics/mouse_sleep_001.png" id="5_jfvj8"]
-[ext_resource type="Texture2D" uid="uid://cc6fmjdbnx4o7" path="res://assets/graphics/mouse_sleep_002.png" id="6_oexyj"]
-[ext_resource type="Texture2D" uid="uid://1xosr2vefejp" path="res://assets/graphics/mouse_sleep_left_001.png" id="8_3vxtt"]
-[ext_resource type="Texture2D" uid="uid://dw2jws0wjo2uu" path="res://assets/graphics/mouse_sleep_left_002.png" id="9_jdspl"]
-[ext_resource type="Texture2D" uid="uid://n1c4qavvk2jw" path="res://assets/graphics/mouse_sleep_right_001.png" id="10_dj0fa"]
-[ext_resource type="Texture2D" uid="uid://ccgddtnbcjc5y" path="res://assets/graphics/mouse_sleep_right_002.png" id="11_7awfe"]
+[ext_resource type="Texture2D" uid="uid://463fy2kf2qug" path="res://assets/graphics/mouse/mouse_eat_001.png" id="2_pcxwx"]
+[ext_resource type="Texture2D" uid="uid://bfhts2020ook" path="res://assets/graphics/mouse/mouse_eat_002.png" id="3_0tpl5"]
+[ext_resource type="Texture2D" uid="uid://bsrqnmihcve4w" path="res://assets/graphics/mouse/mouse_move_001.png" id="4_v46ls"]
+[ext_resource type="Texture2D" uid="uid://bi48mfg1vmih4" path="res://assets/graphics/mouse/mouse_move_002.png" id="5_pdic7"]
+[ext_resource type="Texture2D" uid="uid://1xosr2vefejp" path="res://assets/graphics/mouse/mouse_sleep_left_001.png" id="6_l6dxl"]
+[ext_resource type="Texture2D" uid="uid://dw2jws0wjo2uu" path="res://assets/graphics/mouse/mouse_sleep_left_002.png" id="7_jreek"]
+[ext_resource type="Texture2D" uid="uid://n1c4qavvk2jw" path="res://assets/graphics/mouse/mouse_sleep_right_001.png" id="8_lavkl"]
+[ext_resource type="Texture2D" uid="uid://ccgddtnbcjc5y" path="res://assets/graphics/mouse/mouse_sleep_right_002.png" id="9_gnogw"]
+[ext_resource type="Texture2D" uid="uid://c3kygt876ha6o" path="res://assets/graphics/mouse/mouse_still_001.png" id="10_6lad0"]
+[ext_resource type="Texture2D" uid="uid://bj71gihu8qvd4" path="res://assets/graphics/mouse/mouse_still_002.png" id="11_5ewas"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_a4ht0"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_8hl4q")
+"texture": ExtResource("2_pcxwx")
 }, {
 "duration": 1.0,
-"texture": ExtResource("2_0d3em")
+"texture": ExtResource("3_0tpl5")
 }],
 "loop": true,
 "name": &"mouse_eat",
@@ -29,10 +27,10 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_4ukei")
+"texture": ExtResource("4_v46ls")
 }, {
 "duration": 1.0,
-"texture": ExtResource("2_8k7mi")
+"texture": ExtResource("5_pdic7")
 }],
 "loop": true,
 "name": &"mouse_move",
@@ -40,21 +38,10 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("5_jfvj8")
+"texture": ExtResource("6_l6dxl")
 }, {
 "duration": 1.0,
-"texture": ExtResource("6_oexyj")
-}],
-"loop": true,
-"name": &"mouse_sleep",
-"speed": 1.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("8_3vxtt")
-}, {
-"duration": 1.0,
-"texture": ExtResource("9_jdspl")
+"texture": ExtResource("7_jreek")
 }],
 "loop": true,
 "name": &"mouse_sleep_left",
@@ -62,10 +49,10 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("10_dj0fa")
+"texture": ExtResource("8_lavkl")
 }, {
 "duration": 1.0,
-"texture": ExtResource("11_7awfe")
+"texture": ExtResource("9_gnogw")
 }],
 "loop": true,
 "name": &"mouse_sleep_right",
@@ -73,10 +60,10 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_b5sfi")
+"texture": ExtResource("10_6lad0")
 }, {
 "duration": 1.0,
-"texture": ExtResource("2_mhf7h")
+"texture": ExtResource("11_5ewas")
 }],
 "loop": true,
 "name": &"mouse_still",
@@ -96,7 +83,7 @@ metadata/_edit_group_ = true
 [node name="PlayerMouseAnims" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_a4ht0")
-animation = &"mouse_eat"
+animation = &"mouse_still"
 
 [node name="PlayerMouseCollision" type="CollisionShape2D" parent="."]
 rotation = 1.5708

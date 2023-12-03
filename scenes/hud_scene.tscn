@@ -1,10 +1,152 @@
-[gd_scene load_steps=2 format=3 uid="uid://cagcnvjsihqp4"]
+[gd_scene load_steps=22 format=3 uid="uid://cagcnvjsihqp4"]
 
 [ext_resource type="Script" path="res://scripts/hud_script.gd" id="1_oq0hi"]
+[ext_resource type="Texture2D" uid="uid://1xosr2vefejp" path="res://assets/graphics/mouse/mouse_sleep_left_001.png" id="4_fq8ek"]
+[ext_resource type="Texture2D" uid="uid://c3kygt876ha6o" path="res://assets/graphics/mouse/mouse_still_001.png" id="4_lyda7"]
+[ext_resource type="Texture2D" uid="uid://dw2jws0wjo2uu" path="res://assets/graphics/mouse/mouse_sleep_left_002.png" id="5_0ooid"]
+[ext_resource type="Texture2D" uid="uid://bj71gihu8qvd4" path="res://assets/graphics/mouse/mouse_still_002.png" id="5_5b2l7"]
+[ext_resource type="Texture2D" uid="uid://bsrqnmihcve4w" path="res://assets/graphics/mouse/mouse_move_001.png" id="6_veyqw"]
+[ext_resource type="Texture2D" uid="uid://ds5xdgiokqac6" path="res://assets/graphics/timer/timer_standing.png" id="7_g3y7o"]
+[ext_resource type="Texture2D" uid="uid://bi48mfg1vmih4" path="res://assets/graphics/mouse/mouse_move_002.png" id="7_nbvow"]
+[ext_resource type="Texture2D" uid="uid://c6j1idwrxjspg" path="res://assets/graphics/mouse/mouse_move_001r.png" id="8_b8du8"]
+[ext_resource type="Texture2D" uid="uid://c7yh4pwghe8rc" path="res://assets/graphics/timer/timer_squashed.png" id="8_ri7d7"]
+[ext_resource type="Texture2D" uid="uid://cbrlpg7jfkeom" path="res://assets/graphics/mouse/mouse_move_002r.png" id="9_c4upv"]
+[ext_resource type="Texture2D" uid="uid://bxbe7ksqukeok" path="res://assets/graphics/timer/timer_stretched_up_left.png" id="9_cikxx"]
+[ext_resource type="Texture2D" uid="uid://c0807qraul1a5" path="res://assets/graphics/timer/timer_stretched_up.png" id="9_moiys"]
+[ext_resource type="Texture2D" uid="uid://d268e3wfe7h10" path="res://assets/graphics/timer/timer_stretched_up_right.png" id="10_3h8wx"]
+[ext_resource type="Texture2D" uid="uid://cfn5q33we38pq" path="res://assets/graphics/multi_color_cheese/multi_color_cheese_001.png" id="12_jjuwe"]
+[ext_resource type="Texture2D" uid="uid://bygtlhsqc6e2n" path="res://assets/graphics/multi_color_cheese/multi_color_cheese_002.png" id="13_plwmi"]
+[ext_resource type="Texture2D" uid="uid://w5ex1cq7ica4" path="res://assets/graphics/multi_color_cheese/multi_color_cheese_003.png" id="14_vi5xs"]
+[ext_resource type="AudioStream" uid="uid://dckeepbeej2pe" path="res://assets/audio/jump.wav" id="18_xv236"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4rpi6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("12_jjuwe")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_plwmi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_vi5xs")
+}],
+"loop": true,
+"name": &"multi_cheese_flash",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("12_jjuwe")
+}],
+"loop": true,
+"name": &"multi_cheese_intact",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_y342v"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_g3y7o")
+}],
+"loop": true,
+"name": &"timer_intact",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_ri7d7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_cikxx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_ri7d7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_3h8wx")
+}],
+"loop": true,
+"name": &"timer_squash_left_right",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_ri7d7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_moiys")
+}],
+"loop": true,
+"name": &"timer_squash_up_down",
+"speed": 2.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_pos65"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_fq8ek")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_0ooid")
+}],
+"loop": true,
+"name": &"mouse_sleep",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_lyda7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_5b2l7")
+}],
+"loop": true,
+"name": &"mouse_still",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_veyqw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_nbvow")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_veyqw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_nbvow")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_b8du8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_c4upv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_b8du8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_c4upv")
+}],
+"loop": true,
+"name": &"mouse_wiggle",
+"speed": 6.0
+}]
 
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource("1_oq0hi")
 game_title = "Mouse Time"
+stow_exit_button = true
+
+[node name="UIBar" type="ColorRect" parent="."]
+offset_top = -1.0
+offset_right = 1152.0
+offset_bottom = 72.0
+color = Color(0.215686, 0.611765, 0.870588, 1)
 
 [node name="StartButton" type="Button" parent="."]
 anchors_preset = 8
@@ -51,6 +193,13 @@ grow_vertical = 0
 theme_override_font_sizes/font_size = 45
 text = "Exit Game"
 
+[node name="ToggleSoundButton" type="Button" parent="."]
+offset_left = 1016.0
+offset_top = 584.0
+offset_right = 1128.0
+offset_bottom = 624.0
+text = "Sound On ♫"
+
 [node name="MessageLabel" type="Label" parent="."]
 anchors_preset = 8
 anchor_left = 0.5
@@ -69,6 +218,7 @@ horizontal_alignment = 1
 autowrap_mode = 2
 
 [node name="TimeLabel" type="Label" parent="."]
+visible = false
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
@@ -85,33 +235,27 @@ autowrap_mode = 2
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_top = -1.0
-offset_right = 40.0
-offset_bottom = 47.0
+offset_left = -24.0
+offset_top = 24.0
+offset_right = 16.0
+offset_bottom = 72.0
 grow_horizontal = 2
 theme_override_font_sizes/font_size = 32
 text = "0
 "
 autowrap_mode = 2
 
-[node name="CheeseEatenLabel" type="Label" parent="."]
-offset_left = 8.0
-offset_right = 207.0
-offset_bottom = 48.0
-theme_override_font_sizes/font_size = 32
-text = "Yum Cheese:"
-horizontal_alignment = 1
-autowrap_mode = 2
-
 [node name="CheeseEatenCounter" type="Label" parent="."]
-offset_left = 216.0
-offset_right = 256.0
-offset_bottom = 48.0
+offset_left = 88.0
+offset_top = 27.0
+offset_right = 128.0
+offset_bottom = 75.0
 theme_override_font_sizes/font_size = 32
 text = "0"
 autowrap_mode = 2
 
 [node name="MouseSpeedLabel" type="Label" parent="."]
+visible = false
 offset_left = 824.0
 offset_top = -1.0
 offset_right = 1032.0
@@ -121,15 +265,16 @@ text = "Zoom Factor:"
 autowrap_mode = 2
 
 [node name="MouseSpeedDisplay" type="Label" parent="."]
-offset_left = 1032.0
-offset_top = -1.0
-offset_right = 1064.0
-offset_bottom = 47.0
+offset_left = 1042.0
+offset_top = 27.0
+offset_right = 1080.0
+offset_bottom = 75.0
 theme_override_font_sizes/font_size = 32
-text = "0"
+text = "100%"
 autowrap_mode = 2
 
 [node name="HowToPlayText" type="Label" parent="."]
+visible = false
 offset_left = 32.0
 offset_top = 16.0
 offset_right = 1128.0
@@ -142,6 +287,30 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
 
+[node name="MultiCheeseAnims" type="AnimatedSprite2D" parent="."]
+position = Vector2(56, 43)
+scale = Vector2(0.45, 0.45)
+sprite_frames = SubResource("SpriteFrames_4rpi6")
+animation = &"multi_cheese_flash"
+frame = 2
+frame_progress = 0.20375
+
+[node name="TimerAnims" type="AnimatedSprite2D" parent="."]
+position = Vector2(528, 40)
+scale = Vector2(0.4, 0.4)
+sprite_frames = SubResource("SpriteFrames_y342v")
+animation = &"timer_intact"
+
+[node name="MouseWiggleAnims" type="AnimatedSprite2D" parent="."]
+position = Vector2(1016, 47)
+scale = Vector2(0.3, 0.3)
+sprite_frames = SubResource("SpriteFrames_pos65")
+animation = &"mouse_still"
+
+[node name="SoundToggledOnSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("18_xv236")
+
 [connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="HowToPlayButton" to="." method="_on_how_to_play_button_pressed"]
 [connection signal="pressed" from="ExitGameButton" to="." method="_on_exit_game_button_pressed"]
+[connection signal="pressed" from="ToggleSoundButton" to="." method="_on_toggle_sound_button_pressed"]

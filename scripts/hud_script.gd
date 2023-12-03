@@ -1,6 +1,7 @@
 extends CanvasLayer
 
 signal start_game
+signal toggle_sound
 
 @export var game_title : String
 @export var stow_exit_button = false
@@ -10,22 +11,29 @@ var showing_how_to_play = false
 var how_to_play_button_text = "How To Play"
 var how_to_play_button_close_text = "Return"
 
+var sound_on : bool
+var sound_on_button_text = "Sound On ♫"
+var sound_off_button_text = "Sound Off"
+
 var game_ui_components = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	game_ui_components = [
 		$MessageLabel,
-		$TimeLabel,
 		$TimeCounter,
-		$CheeseEatenLabel,
 		$CheeseEatenCounter,
-		$MouseSpeedLabel,
-		$MouseSpeedDisplay		
+		$MouseSpeedDisplay,
+		$MultiCheeseAnims,
+		$TimerAnims,
+		$MouseWiggleAnims,
+		$UIBar
 	]
 	$HowToPlayText.hide()
+	start_animated_ui(false)
 	if (stow_exit_button):
 		$ExitGameButton.hide()
+	sound_on = true
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -37,6 +45,8 @@ func _on_start_button_pressed():
 	$StartButton.hide()
 	$HowToPlayButton.hide()
 	$ExitGameButton.hide()
+	$ToggleSoundButton.hide()
+	$MouseWiggleAnims.play("mouse_still")
 	display_game_ui(true)
 	start_game.emit()
 
@@ -72,6 +82,7 @@ func hide_message():
 func show_buttons():
 	$StartButton.show()
 	$HowToPlayButton.show()
+	$ToggleSoundButton.show()
 	if (!stow_exit_button):
 		$ExitGameButton.show()
 
@@ -79,6 +90,7 @@ func show_buttons():
 func show_how_to_play():
 	$StartButton.hide()
 	$ExitGameButton.hide()
+	$ToggleSoundButton.hide()
 	display_game_ui(false)
 	$HowToPlayText.show()
 	$HowToPlayButton.text = how_to_play_button_close_text
@@ -88,6 +100,7 @@ func show_how_to_play():
 func close_how_to_play():
 	$HowToPlayText.hide()
 	$StartButton.show()
+	$ToggleSoundButton.show()
 	if (!stow_exit_button):
 		$ExitGameButton.show()
 	display_game_ui(true)
@@ -105,6 +118,18 @@ func display_game_ui(showUi : bool):
 			component.hide()
 
 
+func start_animated_ui(animateUi : bool):
+	if (animateUi):
+		$MultiCheeseAnims.play("multi_cheese_flash")
+		$TimerAnims.play(
+			"timer_squash_up_down" if (randi() % 100 >= 50)
+			else "timer_squash_left_right")
+		$MouseWiggleAnims.play("mouse_wiggle")
+	else:
+		$MultiCheeseAnims.play("multi_cheese_intact")
+		$TimerAnims.play("timer_intact")
+		$MouseWiggleAnims.play("mouse_sleep")
+
 func update_time_counter(time : int):
 	$TimeCounter.text = str(time)
 
@@ -114,8 +139,19 @@ func update_cheese_counter(cheese : int):
 
 
 func update_mouse_speed_display(speed : int):
-	$MouseSpeedDisplay.text = str(speed)
+	$MouseSpeedDisplay.text = str(speed) + "%"
 
 
 func _on_exit_game_button_pressed():
 	get_tree().quit()
+
+
+func _on_toggle_sound_button_pressed():
+	toggle_sound.emit()
+	if (sound_on):
+		sound_on = false
+		$ToggleSoundButton.text = sound_off_button_text
+	else:
+		sound_on = true
+		$ToggleSoundButton.text = sound_on_button_text
+		$SoundToggledOnSound.play()

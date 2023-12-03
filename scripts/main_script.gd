@@ -2,9 +2,6 @@ extends Node
 
 @export var light_cheese_blueprint : PackedScene
 
-@export var light_cheese_spawn_buffer_x = 100
-@export var light_cheese_spawn_buffer_y = 100
-
 var get_ready_messages = ["3...", "2..", "1."]
 var go_message = "Go!"
 var get_ready_display_duration = 1
@@ -19,12 +16,40 @@ var active = false
 var game_timer = 0
 var cheese_counter = 0
 
-# Size of the game window.
-var screen_size
+# Playable area of the game (clamps where the big cheese can be).
+var play_area_min : Vector2
+var play_area_max : Vector2
+var play_area_center : Vector2
+
+# Available spawning area for light cheeses
+var spawn_area_min : Vector2
+var spawn_area_max : Vector2
+
+# Sounds emitted upon collecting a cheese
+var cheese_collect_sounds = []
+
+var sound_on : bool
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	screen_size = get_viewport().get_visible_rect().size
+	play_area_min = Vector2($PlayArea.position.x, $PlayArea.position.y)
+	play_area_max = Vector2(
+		$PlayArea.position.x + $PlayArea.size.x, 
+		$PlayArea.position.y + $PlayArea.size.y)
+	play_area_center = Vector2(
+		(play_area_min.x + play_area_max.x) / 2,
+		(play_area_min.y + play_area_max.y) / 2)
+	spawn_area_min = Vector2($SpawnArea.position.x, $SpawnArea.position.y)
+	spawn_area_max = Vector2(
+		$SpawnArea.position.x + $SpawnArea.size.x, 
+		$SpawnArea.position.y + $SpawnArea.size.y)
+	$CheeseCursor.set_play_area(play_area_min, play_area_max)
+	cheese_collect_sounds = [
+		$CheeseCollectSound001,
+		$CheeseCollectSound002,
+		$CheeseCollectSound003
+	]
+	sound_on = true
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -50,10 +75,8 @@ func _on_light_cheese_spawn_timer_timeout():
 	if (active):
 		create_light_cheese_at(
 			Vector2(
-				randi_range(light_cheese_spawn_buffer_x,
-				screen_size.x - light_cheese_spawn_buffer_x),
-				randi_range(light_cheese_spawn_buffer_y,
-				screen_size.y - light_cheese_spawn_buffer_y)))
+				randi_range(spawn_area_min.x, spawn_area_max.x),
+				randi_range(spawn_area_min.y, spawn_area_max.y)))
 
 
 # This function is triggered upon the mouse going to sleep. It basically stops
@@ -61,9 +84,11 @@ func _on_light_cheese_spawn_timer_timeout():
 # game has ended. After a small delay, the player can interact with the game
 # again, using the buttons that show up at the start of the game.
 func _on_player_mouse_mouse_goes_to_sleep():
+	if (sound_on): $SleepySound.play()
 	$PerSecondTimer.stop()
 	$LightCheeseSpawnTimer.stop()
 	$LightCheeseSpawnTimer2.stop()
+	$HUD.start_animated_ui(false)
 	await $HUD.show_message(finish_message, finish_display_duration)
 	$HUD.show_message(try_again_message)
 	$HUD.show_buttons()
@@ -72,6 +97,7 @@ func _on_player_mouse_mouse_goes_to_sleep():
 # This function is called once the big cheese is eaten. It basically stops
 # nearly all active functions. The big cheese still counts as a point!
 func _on_cheese_cursor_cheese_eaten():
+	if (sound_on): $TadaSound.play()
 	cheese_eaten()
 	active = false
 
@@ -79,6 +105,8 @@ func _on_cheese_cursor_cheese_eaten():
 # This function is called each time a light cheese is eaten. The game doesn't
 # stop, but the player's score goes up (and the mouse gets a big speed boost).
 func _on_light_cheese_light_cheese_eaten():
+	if (sound_on):
+		cheese_collect_sounds[randi() % cheese_collect_sounds.size()].play()
 	cheese_eaten()
 	speed_up($PlayerMouse.get_major_speed_up())
 
@@ -93,7 +121,9 @@ func new_game():
 	initiate_player_mouse()
 	initiate_game_ui()
 	await get_ready_event()
+	if (sound_on): $GoSound.play()
 	$HUD.show_message(go_message, get_ready_display_duration)
+	$HUD.start_animated_ui(true)
 	$PerSecondTimer.start()
 	$LightCheeseSpawnTimer.start()
 	$LightCheeseSpawnTimer2.start()
@@ -128,6 +158,7 @@ func speed_up(speed_increase : int):
 # Displays the get ready countdown at the start of the game.
 func get_ready_event():
 	for msg in get_ready_messages:
+		if (sound_on): $CountdownSound.play()
 		await $HUD.show_message(msg, get_ready_display_duration)
 
 
@@ -138,7 +169,7 @@ func initiate_cheese_cursor():
 
 # The mouse always starts in the center of the play area.
 func initiate_player_mouse():
-	$PlayerMouse.start(Vector2(screen_size.x / 2, screen_size.y / 2))
+	$PlayerMouse.start(play_area_center)
 
 
 # Initiates the game UI with the in-game parameters.
@@ -146,3 +177,10 @@ func initiate_game_ui():
 	$HUD.update_time_counter(game_timer)
 	$HUD.update_cheese_counter(cheese_counter)
 	$HUD.update_mouse_speed_display($PlayerMouse.get_speed())
+
+
+func _on_hud_toggle_sound():
+	if (sound_on):
+		sound_on = false
+	else:
+		sound_on = true
