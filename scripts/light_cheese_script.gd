@@ -1,12 +1,25 @@
+class_name LightCheese
 extends Area2D
 
 signal light_cheese_eaten
 
+
+const light_cheese_being_eaten_duration = 0.4
+
+
+var shimmer_alpha = 0.15
+
+
 var active = false
+var shimmering = false
+var light_cheese_shimmer_delay = 0.25
+var shimmer_time = 1.5
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	hide()
+	$CheeseSparkleAnims.hide()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -25,8 +38,13 @@ func _on_area_entered(area):
 func start(pos):
 	position = pos
 	show()
+	shimmering = true
+	play_light_cheese_shimmering()
+	await get_tree().create_timer(shimmer_time).timeout
+	shimmering = false
 	$LightCheeseAnims.play("light_cheese_intact")
 	$LightCheeseCollision.disabled = false
+	$LightCheeseAnims.modulate.a = 1.0
 	active = true
 
 
@@ -48,6 +66,16 @@ func eat_light_cheese():
 # being eaten seems to help.
 func play_light_cheese_being_eaten_anim():
 	$LightCheeseAnims.play("light_cheese_being_eaten")
-	await get_tree().create_timer(0.9).timeout
-	$LightCheeseAnims.stop()
+	await get_tree().create_timer(light_cheese_being_eaten_duration).timeout
 	hide()
+
+
+func play_light_cheese_shimmering():
+	$CheeseSparkleAnims.show()
+	$CheeseSparkleAnims.play("sparkle")
+	while shimmering:
+		$LightCheeseAnims.modulate.a = shimmer_alpha
+		await get_tree().create_timer(light_cheese_shimmer_delay).timeout
+		shimmer_alpha += 0.15
+	$CheeseSparkleAnims.hide()
+	$CheeseSparkleAnims.queue_free()

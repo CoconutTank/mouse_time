@@ -1,16 +1,18 @@
-[gd_scene load_steps=14 format=3 uid="uid://cxvlnyvc2y1s4"]
+[gd_scene load_steps=16 format=3 uid="uid://cxvlnyvc2y1s4"]
 
 [ext_resource type="Script" path="res://scripts/player_mouse_script.gd" id="1_oi7xx"]
 [ext_resource type="Texture2D" uid="uid://463fy2kf2qug" path="res://assets/graphics/mouse/mouse_eat_001.png" id="2_pcxwx"]
 [ext_resource type="Texture2D" uid="uid://bfhts2020ook" path="res://assets/graphics/mouse/mouse_eat_002.png" id="3_0tpl5"]
+[ext_resource type="Texture2D" uid="uid://bjktj3syyyl4r" path="res://assets/graphics/mouse/mouse_knockout_001.png" id="4_2bcj3"]
 [ext_resource type="Texture2D" uid="uid://bsrqnmihcve4w" path="res://assets/graphics/mouse/mouse_move_001.png" id="4_v46ls"]
+[ext_resource type="Texture2D" uid="uid://v3jmhb41tocc" path="res://assets/graphics/mouse/mouse_knockout_002.png" id="5_e48eb"]
 [ext_resource type="Texture2D" uid="uid://bi48mfg1vmih4" path="res://assets/graphics/mouse/mouse_move_002.png" id="5_pdic7"]
 [ext_resource type="Texture2D" uid="uid://1xosr2vefejp" path="res://assets/graphics/mouse/mouse_sleep_left_001.png" id="6_l6dxl"]
 [ext_resource type="Texture2D" uid="uid://dw2jws0wjo2uu" path="res://assets/graphics/mouse/mouse_sleep_left_002.png" id="7_jreek"]
 [ext_resource type="Texture2D" uid="uid://n1c4qavvk2jw" path="res://assets/graphics/mouse/mouse_sleep_right_001.png" id="8_lavkl"]
 [ext_resource type="Texture2D" uid="uid://ccgddtnbcjc5y" path="res://assets/graphics/mouse/mouse_sleep_right_002.png" id="9_gnogw"]
-[ext_resource type="Texture2D" uid="uid://c3kygt876ha6o" path="res://assets/graphics/mouse/mouse_still_001.png" id="10_6lad0"]
-[ext_resource type="Texture2D" uid="uid://bj71gihu8qvd4" path="res://assets/graphics/mouse/mouse_still_002.png" id="11_5ewas"]
+[ext_resource type="Texture2D" uid="uid://b2hx4ht7bfyw7" path="res://assets/graphics/mouse/mouse_stand_001.png" id="10_8gr5e"]
+[ext_resource type="Texture2D" uid="uid://qk06wcl4oiuy" path="res://assets/graphics/mouse/mouse_stand_002.png" id="11_upic0"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_a4ht0"]
 animations = [{
@@ -23,7 +25,18 @@ animations = [{
 }],
 "loop": true,
 "name": &"mouse_eat",
-"speed": 3.0
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_2bcj3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_e48eb")
+}],
+"loop": true,
+"name": &"mouse_knockout",
+"speed": 2.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -60,14 +73,14 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("10_6lad0")
+"texture": ExtResource("10_8gr5e")
 }, {
 "duration": 1.0,
-"texture": ExtResource("11_5ewas")
+"texture": ExtResource("11_upic0")
 }],
 "loop": true,
 "name": &"mouse_still",
-"speed": 2.0
+"speed": 5.0
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_380uw"]
@@ -76,15 +89,17 @@ height = 54.0
 
 [node name="PlayerMouse" type="Area2D"]
 collision_layer = 2
-collision_mask = 5
+collision_mask = 13
 script = ExtResource("1_oi7xx")
 metadata/_edit_group_ = true
 
 [node name="PlayerMouseAnims" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_a4ht0")
-animation = &"mouse_still"
+animation = &"mouse_knockout"
 
 [node name="PlayerMouseCollision" type="CollisionShape2D" parent="."]
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_380uw")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

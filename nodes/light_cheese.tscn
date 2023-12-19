@@ -1,10 +1,14 @@
-[gd_scene load_steps=8 format=3 uid="uid://d0wmiadj8rkxa"]
+[gd_scene load_steps=13 format=3 uid="uid://d0wmiadj8rkxa"]
 
 [ext_resource type="Script" path="res://scripts/light_cheese_script.gd" id="1_5edyj"]
 [ext_resource type="Texture2D" uid="uid://b5y5j2pdhjgcc" path="res://assets/graphics/light_cheese/light_cheese.png" id="2_n2g37"]
 [ext_resource type="Texture2D" uid="uid://c6avac4a712om" path="res://assets/graphics/light_cheese/eaten_light_cheese_001.png" id="3_oan37"]
 [ext_resource type="Texture2D" uid="uid://c4yeelqis22xl" path="res://assets/graphics/light_cheese/eaten_light_cheese_002.png" id="4_hnmcy"]
 [ext_resource type="Texture2D" uid="uid://dtw6drtwkxtve" path="res://assets/graphics/light_cheese/eaten_light_cheese_003.png" id="5_r2qup"]
+[ext_resource type="Texture2D" uid="uid://d1nhwp31jj8fv" path="res://assets/graphics/light_cheese/cheese_sparkles_001.png" id="6_xxa0p"]
+[ext_resource type="Texture2D" uid="uid://capqnvxp7kid8" path="res://assets/graphics/light_cheese/cheese_sparkles_002.png" id="7_aeqer"]
+[ext_resource type="Texture2D" uid="uid://fwnw0rcx4rqe" path="res://assets/graphics/light_cheese/cheese_sparkles_003.png" id="8_fbf44"]
+[ext_resource type="Texture2D" uid="uid://dflhfamgt6755" path="res://assets/graphics/light_cheese/cheese_sparkles_004.png" id="9_ja0y1"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ccam1"]
 animations = [{
@@ -26,7 +30,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"light_cheese_being_eaten",
-"speed": 5.0
+"speed": 12.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -40,6 +44,26 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_68le2"]
 size = Vector2(26, 24)
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_2janj"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_xxa0p")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_aeqer")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_fbf44")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_ja0y1")
+}],
+"loop": true,
+"name": &"sparkle",
+"speed": 6.0
+}]
+
 [node name="LightCheese" type="Area2D" groups=["light_cheese_group"]]
 collision_layer = 4
 collision_mask = 2
@@ -48,9 +72,16 @@ script = ExtResource("1_5edyj")
 [node name="LightCheeseAnims" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.25, 0.25)
 sprite_frames = SubResource("SpriteFrames_ccam1")
-animation = &"light_cheese_being_eaten"
+animation = &"light_cheese_intact"
 
 [node name="LightCheeseCollision" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_68le2")
+
+[node name="CheeseSparkleAnims" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_2janj")
+animation = &"sparkle"
+frame = 2
+frame_progress = 0.589824
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]

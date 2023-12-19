@@ -1,0 +1,38 @@
+[gd_scene load_steps=6 format=3 uid="uid://cbb1oppqbn0tf"]
+
+[ext_resource type="Script" path="res://scripts/goons/fighty_lobster.gd" id="1_6pdh7"]
+[ext_resource type="Texture2D" uid="uid://cdf5itetfuwcj" path="res://assets/graphics/goons/fighty_lobster/fighty_lobster_walk_001.png" id="2_px4x5"]
+[ext_resource type="Texture2D" uid="uid://bbwlc7qxnyr1g" path="res://assets/graphics/goons/fighty_lobster/fighty_lobster_walk_002.png" id="3_mr57c"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ykfla"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_px4x5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_mr57c")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 3.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qesl0"]
+radius = 24.0
+height = 80.0
+
+[node name="FightyLobster" type="RigidBody2D"]
+collision_layer = 8
+collision_mask = 2
+gravity_scale = 0.0
+script = ExtResource("1_6pdh7")
+
+[node name="FightyLobsterAnims" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.8, 0.8)
+sprite_frames = SubResource("SpriteFrames_ykfla")
+animation = &"walk"
+frame_progress = 0.326356
+
+[node name="FightyLobsterCollision" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_qesl0")

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bygr57s7gwd7g"
-path="res://.godot/imported/mouse_sleep_001.png-302072b71fd5f92655ff78c1854217ad.ctex"
+uid="uid://cra0l8jah8oj0"
+path="res://.godot/imported/cloud_003.png-577a7eddd0d5184215cd960706ff996d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/graphics/mouse/mouse_sleep_001.png"
-dest_files=["res://.godot/imported/mouse_sleep_001.png-302072b71fd5f92655ff78c1854217ad.ctex"]
+source_file="res://assets/graphics/fight_text/cloud_003.png"
+dest_files=["res://.godot/imported/cloud_003.png-577a7eddd0d5184215cd960706ff996d.ctex"]
 
 [params]
 

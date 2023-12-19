@@ -1,10 +1,8 @@
-[gd_scene load_steps=22 format=3 uid="uid://cagcnvjsihqp4"]
+[gd_scene load_steps=34 format=3 uid="uid://cagcnvjsihqp4"]
 
 [ext_resource type="Script" path="res://scripts/hud_script.gd" id="1_oq0hi"]
 [ext_resource type="Texture2D" uid="uid://1xosr2vefejp" path="res://assets/graphics/mouse/mouse_sleep_left_001.png" id="4_fq8ek"]
-[ext_resource type="Texture2D" uid="uid://c3kygt876ha6o" path="res://assets/graphics/mouse/mouse_still_001.png" id="4_lyda7"]
 [ext_resource type="Texture2D" uid="uid://dw2jws0wjo2uu" path="res://assets/graphics/mouse/mouse_sleep_left_002.png" id="5_0ooid"]
-[ext_resource type="Texture2D" uid="uid://bj71gihu8qvd4" path="res://assets/graphics/mouse/mouse_still_002.png" id="5_5b2l7"]
 [ext_resource type="Texture2D" uid="uid://bsrqnmihcve4w" path="res://assets/graphics/mouse/mouse_move_001.png" id="6_veyqw"]
 [ext_resource type="Texture2D" uid="uid://ds5xdgiokqac6" path="res://assets/graphics/timer/timer_standing.png" id="7_g3y7o"]
 [ext_resource type="Texture2D" uid="uid://bi48mfg1vmih4" path="res://assets/graphics/mouse/mouse_move_002.png" id="7_nbvow"]
@@ -14,10 +12,19 @@
 [ext_resource type="Texture2D" uid="uid://bxbe7ksqukeok" path="res://assets/graphics/timer/timer_stretched_up_left.png" id="9_cikxx"]
 [ext_resource type="Texture2D" uid="uid://c0807qraul1a5" path="res://assets/graphics/timer/timer_stretched_up.png" id="9_moiys"]
 [ext_resource type="Texture2D" uid="uid://d268e3wfe7h10" path="res://assets/graphics/timer/timer_stretched_up_right.png" id="10_3h8wx"]
+[ext_resource type="Texture2D" uid="uid://bjktj3syyyl4r" path="res://assets/graphics/mouse/mouse_knockout_001.png" id="10_esa4n"]
+[ext_resource type="Texture2D" uid="uid://v3jmhb41tocc" path="res://assets/graphics/mouse/mouse_knockout_002.png" id="11_v1xsm"]
+[ext_resource type="Texture2D" uid="uid://btejr705mfpei" path="res://assets/graphics/mouse/mouse_spin_001.png" id="12_gs1tv"]
 [ext_resource type="Texture2D" uid="uid://cfn5q33we38pq" path="res://assets/graphics/multi_color_cheese/multi_color_cheese_001.png" id="12_jjuwe"]
+[ext_resource type="Texture2D" uid="uid://hmx80ay3mj4s" path="res://assets/graphics/mouse/mouse_spin_002.png" id="13_lj20y"]
 [ext_resource type="Texture2D" uid="uid://bygtlhsqc6e2n" path="res://assets/graphics/multi_color_cheese/multi_color_cheese_002.png" id="13_plwmi"]
+[ext_resource type="Texture2D" uid="uid://c7iinrb141tgp" path="res://assets/graphics/mouse/mouse_spin_003.png" id="14_ohr03"]
 [ext_resource type="Texture2D" uid="uid://w5ex1cq7ica4" path="res://assets/graphics/multi_color_cheese/multi_color_cheese_003.png" id="14_vi5xs"]
+[ext_resource type="Texture2D" uid="uid://dd43k11mhqk3v" path="res://assets/graphics/mouse/mouse_spin_004.png" id="15_t5fqa"]
+[ext_resource type="Texture2D" uid="uid://b2hx4ht7bfyw7" path="res://assets/graphics/mouse/mouse_stand_001.png" id="16_ipeif"]
+[ext_resource type="Texture2D" uid="uid://qk06wcl4oiuy" path="res://assets/graphics/mouse/mouse_stand_002.png" id="17_uw7qu"]
 [ext_resource type="AudioStream" uid="uid://dckeepbeej2pe" path="res://assets/audio/jump.wav" id="18_xv236"]
+[ext_resource type="Texture2D" uid="uid://odmxk4jill5w" path="res://assets/graphics/misc/multiply_cross.png" id="23_f634r"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_4rpi6"]
 animations = [{
@@ -87,6 +94,17 @@ animations = [{
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": ExtResource("10_esa4n")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_v1xsm")
+}],
+"loop": true,
+"name": &"mouse_knockout",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": ExtResource("4_fq8ek")
 }, {
 "duration": 1.0,
@@ -98,10 +116,27 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("4_lyda7")
+"texture": ExtResource("12_gs1tv")
 }, {
 "duration": 1.0,
-"texture": ExtResource("5_5b2l7")
+"texture": ExtResource("13_lj20y")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_ohr03")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_t5fqa")
+}],
+"loop": true,
+"name": &"mouse_spin",
+"speed": 18.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("16_ipeif")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_uw7qu")
 }],
 "loop": true,
 "name": &"mouse_still",
@@ -134,7 +169,132 @@ animations = [{
 }],
 "loop": true,
 "name": &"mouse_wiggle",
-"speed": 6.0
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_veyqw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_nbvow")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_veyqw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_nbvow")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_b8du8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_c4upv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_b8du8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_c4upv")
+}],
+"loop": true,
+"name": &"mouse_wiggle_faster",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_veyqw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_nbvow")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_veyqw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_nbvow")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_b8du8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_c4upv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_b8du8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_c4upv")
+}],
+"loop": true,
+"name": &"mouse_wiggle_really_fast",
+"speed": 15.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_77us2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_b8du8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_c4upv")
+}],
+"loop": true,
+"name": &"score",
+"speed": 3.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_cr1hu"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("23_f634r")
+}],
+"loop": true,
+"name": &"score",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_spg5a"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_moiys")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_ri7d7")
+}],
+"loop": true,
+"name": &"score",
+"speed": 2.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_riyy3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("23_f634r")
+}],
+"loop": true,
+"name": &"score",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ixm34"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("12_jjuwe")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_plwmi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_vi5xs")
+}],
+"loop": true,
+"name": &"score",
+"speed": 12.0
 }]
 
 [node name="HUD" type="CanvasLayer"]
@@ -198,36 +358,24 @@ offset_left = 1016.0
 offset_top = 584.0
 offset_right = 1128.0
 offset_bottom = 624.0
-text = "Sound On ♫"
+text = "Sound Off
+"
 
 [node name="MessageLabel" type="Label" parent="."]
+visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -216.0
+offset_left = -576.0
 offset_top = -156.0
-offset_right = 216.0
+offset_right = 576.0
 offset_bottom = -65.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 64
 text = "Mouse Time"
-horizontal_alignment = 1
-autowrap_mode = 2
-
-[node name="TimeLabel" type="Label" parent="."]
-visible = false
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -96.0
-offset_top = -1.0
-offset_bottom = 47.0
-grow_horizontal = 2
-theme_override_font_sizes/font_size = 32
-text = "Time:"
 horizontal_alignment = 1
 autowrap_mode = 2
 
@@ -254,23 +402,13 @@ theme_override_font_sizes/font_size = 32
 text = "0"
 autowrap_mode = 2
 
-[node name="MouseSpeedLabel" type="Label" parent="."]
-visible = false
-offset_left = 824.0
-offset_top = -1.0
-offset_right = 1032.0
-offset_bottom = 47.0
-theme_override_font_sizes/font_size = 32
-text = "Zoom Factor:"
-autowrap_mode = 2
-
-[node name="MouseSpeedDisplay" type="Label" parent="."]
+[node name="MouseVibesDisplay" type="Label" parent="."]
 offset_left = 1042.0
 offset_top = 27.0
 offset_right = 1080.0
 offset_bottom = 75.0
 theme_override_font_sizes/font_size = 32
-text = "100%"
+text = "Zzz..."
 autowrap_mode = 2
 
 [node name="HowToPlayText" type="Label" parent="."]
@@ -301,14 +439,75 @@ scale = Vector2(0.4, 0.4)
 sprite_frames = SubResource("SpriteFrames_y342v")
 animation = &"timer_intact"
 
-[node name="MouseWiggleAnims" type="AnimatedSprite2D" parent="."]
+[node name="MouseVibesAnims" type="AnimatedSprite2D" parent="."]
 position = Vector2(1016, 47)
 scale = Vector2(0.3, 0.3)
 sprite_frames = SubResource("SpriteFrames_pos65")
-animation = &"mouse_still"
+animation = &"mouse_knockout"
 
 [node name="SoundToggledOnSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("18_xv236")
+
+[node name="ScoreDisplayBar" type="ColorRect" parent="."]
+self_modulate = Color(0.941176, 0.247059, 0.592157, 0.462745)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -576.0
+offset_top = -140.0
+offset_right = 576.0
+offset_bottom = -76.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+
+[node name="VibeScoreAnims" type="AnimatedSprite2D" parent="."]
+position = Vector2(552, 216)
+scale = Vector2(0.4, 0.4)
+sprite_frames = SubResource("SpriteFrames_77us2")
+animation = &"score"
+frame_progress = 0.798953
+
+[node name="MultiplySymbol001" type="AnimatedSprite2D" parent="."]
+position = Vector2(504, 216)
+scale = Vector2(0.25, 0.25)
+sprite_frames = SubResource("SpriteFrames_cr1hu")
+animation = &"score"
+
+[node name="TimeScoreAnims" type="AnimatedSprite2D" parent="."]
+position = Vector2(464, 216)
+scale = Vector2(0.4, 0.4)
+sprite_frames = SubResource("SpriteFrames_spg5a")
+animation = &"score"
+frame = 1
+frame_progress = 0.0379695
+
+[node name="MultiplySymbol002" type="AnimatedSprite2D" parent="."]
+position = Vector2(424, 216)
+scale = Vector2(0.25, 0.25)
+sprite_frames = SubResource("SpriteFrames_riyy3")
+animation = &"score"
+
+[node name="CheeseScoreAnims" type="AnimatedSprite2D" parent="."]
+position = Vector2(379, 215)
+scale = Vector2(0.4, 0.4)
+sprite_frames = SubResource("SpriteFrames_ixm34")
+animation = &"score"
+frame = 2
+frame_progress = 0.675491
+
+[node name="ScoreDisplay" type="Label" parent="."]
+offset_left = 592.0
+offset_top = 184.0
+offset_right = 1152.0
+offset_bottom = 250.0
+theme_override_font_sizes/font_size = 45
+text = ":O
+"
+vertical_alignment = 1
+autowrap_mode = 2
 
 [connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="HowToPlayButton" to="." method="_on_how_to_play_button_pressed"]

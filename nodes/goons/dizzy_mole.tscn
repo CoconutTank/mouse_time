@@ -1,0 +1,81 @@
+[gd_scene load_steps=11 format=3 uid="uid://cy6jdrcdolbjc"]
+
+[ext_resource type="Script" path="res://scripts/goons/dizzy_mole.gd" id="1_qs1eb"]
+[ext_resource type="Texture2D" uid="uid://5e43bihelph3" path="res://assets/graphics/goons/dizzy_mole/mole_walk_001.png" id="2_6mtjl"]
+[ext_resource type="Texture2D" uid="uid://dekyd06d1kpps" path="res://assets/graphics/goons/dizzy_mole/dizzy_mole_dig_001.png" id="2_tvog6"]
+[ext_resource type="Texture2D" uid="uid://bqcsq0u8wyfhd" path="res://assets/graphics/goons/dizzy_mole/mole_walk_002.png" id="3_6oyow"]
+[ext_resource type="Texture2D" uid="uid://bayanp02bu7tj" path="res://assets/graphics/goons/dizzy_mole/dizzy_mole_dig_002.png" id="3_tsf6j"]
+[ext_resource type="Texture2D" uid="uid://ble4rxn54oijj" path="res://assets/graphics/goons/unearth/dirt_pile.png" id="4_q6hhj"]
+[ext_resource type="Texture2D" uid="uid://bj1sgjp35j1u7" path="res://assets/graphics/goons/unearth/unearth_001.png" id="5_bwhhq"]
+[ext_resource type="Texture2D" uid="uid://bpj8tib6w2mhy" path="res://assets/graphics/goons/unearth/unearth_002.png" id="6_0yr6u"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_gg7d7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_tvog6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_tsf6j")
+}],
+"loop": true,
+"name": &"despawn",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_q6hhj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_bwhhq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_q6hhj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_0yr6u")
+}],
+"loop": true,
+"name": &"emerge",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_bwhhq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_0yr6u")
+}],
+"loop": true,
+"name": &"emerge_soon",
+"speed": 15.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_6mtjl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_6oyow")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 3.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kik1l"]
+radius = 24.0
+height = 64.0
+
+[node name="DizzyMole" type="RigidBody2D"]
+collision_layer = 8
+collision_mask = 2
+gravity_scale = 0.0
+script = ExtResource("1_qs1eb")
+
+[node name="DizzyMoleAnims" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_gg7d7")
+animation = &"walk"
+
+[node name="DizzyMoleCollision" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_kik1l")

@@ -14,8 +14,8 @@ config/name="Mouse Time"
 config/description="A funny game about a mouse eating cheese. A big cheese is on your (computer) mouse, which you can move about, and the mouse will chase after the big cheese. Eat as much cheese as possible for a high score. Keep in mind that the mouse will get faster over time, and each time it eats a cheese!"
 run/main_scene="res://scenes/main.tscn"
 config/features=PackedStringArray("4.1", "Forward Plus")
-config/icon="res://assets/graphics/icons/mouse_time_icon_256.png"
-config/windows_native_icon="res://assets/graphics/icons/mouse_time_icon_wind.ico"
+config/icon="res://assets/graphics/icons/mouse_time_icon_002_256.png"
+config/windows_native_icon="res://assets/graphics/icons/mouse_time_icon_002_windows.ico"
 
 [display]
 
@@ -29,6 +29,11 @@ window/stretch/mode="canvas_items"
 2d_physics/layer_1="Cheese"
 2d_physics/layer_2="PlayerMouse"
 2d_physics/layer_3="LightCheese"
+2d_physics/layer_4="Goons"
+
+[physics]
+
+2d/default_linear_damp=0.0
 
 [rendering]
 

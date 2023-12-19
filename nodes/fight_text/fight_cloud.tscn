@@ -1,0 +1,48 @@
+[gd_scene load_steps=7 format=3 uid="uid://c282lma6abcsb"]
+
+[ext_resource type="Texture2D" uid="uid://cs6c7uxk5nold" path="res://assets/graphics/fight_text/cloud_001.png" id="1_5j1ah"]
+[ext_resource type="Texture2D" uid="uid://cfavuhs4jnphe" path="res://assets/graphics/fight_text/cloud_002.png" id="2_i8q3m"]
+[ext_resource type="Texture2D" uid="uid://cra0l8jah8oj0" path="res://assets/graphics/fight_text/cloud_003.png" id="3_s7ece"]
+[ext_resource type="Texture2D" uid="uid://7fv7u1xc12k8" path="res://assets/graphics/fight_text/cloud_shrink_001.png" id="4_3dje7"]
+[ext_resource type="Texture2D" uid="uid://cld4ch4y7fv6h" path="res://assets/graphics/fight_text/cloud_shrink_002.png" id="5_febqq"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ys22v"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_5j1ah")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_i8q3m")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_s7ece")
+}],
+"loop": true,
+"name": &"default",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_3dje7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_febqq")
+}, {
+"duration": 1.0,
+"texture": null
+}, {
+"duration": 1.0,
+"texture": null
+}],
+"loop": true,
+"name": &"shrink",
+"speed": 12.0
+}]
+
+[node name="FightCloud" type="Node"]
+
+[node name="FightCloudAnims" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_ys22v")
+animation = &"shrink"
+frame_progress = 0.942967

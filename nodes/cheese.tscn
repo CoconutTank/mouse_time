@@ -26,7 +26,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"cheese_being_eaten",
-"speed": 1.0
+"speed": 2.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -49,6 +49,8 @@ metadata/_edit_group_ = true
 scale = Vector2(0.35, 0.35)
 sprite_frames = SubResource("SpriteFrames_i4kva")
 animation = &"cheese_being_eaten"
+frame = 1
+frame_progress = 0.49171
 
 [node name="CheeseCollision" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_u8q5y")

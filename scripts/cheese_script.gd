@@ -1,3 +1,4 @@
+class_name Cheese
 extends Area2D
 
 signal cheese_eaten
@@ -29,7 +30,10 @@ func _input(event):
 # Time, the Area2D that matters here is the mouse.
 func _on_area_entered(area):
 	if (active):
-		eat_cheese()
+		if area is PlayerMouse && area.active:
+			eat_cheese()
+		else:
+			printerr("UNKNOWN AREA intersecting the big cheese!")
 
 
 # Initializes the big cheese at the given position.
@@ -52,14 +56,14 @@ func set_play_area(new_play_area_min : Vector2, new_play_area_max : Vector2):
 func eat_cheese():
 	cheese_eaten.emit()
 	active = false
-	await play_cheese_being_eaten_anim()
-	hide() # Cheese disappears after being eaten.
 	# Must be deferred as we can't change physics properties on a physics callback.
 	$CheeseCollision.set_deferred("disabled", true)
+	await play_cheese_being_eaten_anim()
+	hide() # Cheese disappears after being eaten.
 
 
 # Plays the animation for the big cheese being eaten.
 func play_cheese_being_eaten_anim():
 	$CheeseAnims.play("cheese_being_eaten")
-	await get_tree().create_timer(5.0).timeout
+	await get_tree().create_timer(2.4).timeout
 	$CheeseAnims.stop()

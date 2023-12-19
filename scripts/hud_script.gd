@@ -1,3 +1,4 @@
+class_name HudScene
 extends CanvasLayer
 
 signal start_game
@@ -17,23 +18,46 @@ var sound_off_button_text = "Sound Off"
 
 var game_ui_components = []
 
+var knock_out_limit = 50
+var high_vibe_limit = 200
+var even_higher_vibe_limit = 300
+var xtreme_vibe_limit = 400
+var nuclear_knockout_detected = false
+
+
+const score_elements_display_delay = 0.75
+const score_roller_display_delay = 0.025
+const score_roller_deltas = [
+	100000000,
+	10000000,
+	1000000,
+	100000,
+	10000,
+	1000,
+	100,
+	10,
+	1
+]
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	reset_score()
 	game_ui_components = [
 		$MessageLabel,
 		$TimeCounter,
 		$CheeseEatenCounter,
-		$MouseSpeedDisplay,
+		$MouseVibesDisplay,
 		$MultiCheeseAnims,
 		$TimerAnims,
-		$MouseWiggleAnims,
+		$MouseVibesAnims,
 		$UIBar
 	]
 	$HowToPlayText.hide()
 	start_animated_ui(false)
 	if (stow_exit_button):
 		$ExitGameButton.hide()
-	sound_on = true
+	sound_on = false
+	nuclear_knockout_detected = false
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -46,7 +70,7 @@ func _on_start_button_pressed():
 	$HowToPlayButton.hide()
 	$ExitGameButton.hide()
 	$ToggleSoundButton.hide()
-	$MouseWiggleAnims.play("mouse_still")
+	$MouseVibesAnims.play("mouse_still")
 	display_game_ui(true)
 	start_game.emit()
 
@@ -122,13 +146,17 @@ func start_animated_ui(animateUi : bool):
 	if (animateUi):
 		$MultiCheeseAnims.play("multi_cheese_flash")
 		$TimerAnims.play(
-			"timer_squash_up_down" if (randi() % 100 >= 50)
+			"timer_squash_up_down" if (randi() % 2 == 0)
 			else "timer_squash_left_right")
-		$MouseWiggleAnims.play("mouse_wiggle")
+		$MouseVibesAnims.play("mouse_wiggle")
 	else:
 		$MultiCheeseAnims.play("multi_cheese_intact")
 		$TimerAnims.play("timer_intact")
-		$MouseWiggleAnims.play("mouse_sleep")
+		if nuclear_knockout_detected:
+			$MouseVibesAnims.play("mouse_knockout")
+		else:
+			$MouseVibesAnims.play("mouse_sleep")
+
 
 func update_time_counter(time : int):
 	$TimeCounter.text = str(time)
@@ -138,8 +166,21 @@ func update_cheese_counter(cheese : int):
 	$CheeseEatenCounter.text = str(cheese)
 
 
-func update_mouse_speed_display(speed : int):
-	$MouseSpeedDisplay.text = str(speed) + "%"
+func update_vibe_display(vibes : int):
+	if vibes <= knock_out_limit:
+		$MouseVibesAnims.play("mouse_knockout")
+		$MouseVibesDisplay.text = "KO!"
+		nuclear_knockout_detected = true
+		return
+	if vibes >= xtreme_vibe_limit:
+		$MouseVibesAnims.play("mouse_spin")
+	elif vibes >= even_higher_vibe_limit:
+		$MouseVibesAnims.play("mouse_wiggle_really_fast")
+	elif vibes >= high_vibe_limit:
+		$MouseVibesAnims.play("mouse_wiggle_faster")
+	else:
+		$MouseVibesAnims.play("mouse_wiggle")
+	$MouseVibesDisplay.text = str(vibes)
 
 
 func _on_exit_game_button_pressed():
@@ -155,3 +196,71 @@ func _on_toggle_sound_button_pressed():
 		sound_on = true
 		$ToggleSoundButton.text = sound_on_button_text
 		$SoundToggledOnSound.play()
+
+
+func reset_score():
+	$VibeScoreAnims.hide()
+	$MultiplySymbol001.hide()
+	$TimeScoreAnims.hide()
+	$MultiplySymbol002.hide()
+	$CheeseScoreAnims.hide()
+	$ScoreDisplay.text = ""
+	$ScoreDisplay.hide()
+	$ScoreDisplayBar.hide()
+
+
+func show_score_lively(vibe_score : int, time_score : int, cheese_score : int):
+	var score = 0
+	var vibe_times_time = vibe_score * time_score
+	var total_score = vibe_score * time_score * cheese_score
+	$ScoreDisplayBar.show()
+	$VibeScoreAnims.show()
+	$VibeScoreAnims.play("score")
+	await get_tree().create_timer(score_elements_display_delay).timeout
+	$ScoreDisplay.text = "= " + str(score)
+	$ScoreDisplay.show()
+	# Roll the score!
+	while score != vibe_score:
+		score = score_roller_helper_func(score, vibe_score)
+		$ScoreDisplay.text = "= " + str(score)
+		await get_tree().create_timer(score_roller_display_delay).timeout
+	await get_tree().create_timer(score_elements_display_delay).timeout
+	$MultiplySymbol001.show()
+	$MultiplySymbol001.play("score")
+	await get_tree().create_timer(score_elements_display_delay).timeout
+	$TimeScoreAnims.show()
+	$TimeScoreAnims.play("score")
+	# Roll the score!
+	while score != vibe_times_time:
+		score = score_roller_helper_func(score, vibe_times_time)
+		$ScoreDisplay.text = "= " + str(score)
+		await get_tree().create_timer(score_roller_display_delay).timeout
+	await get_tree().create_timer(score_elements_display_delay).timeout
+	$MultiplySymbol002.show()
+	$MultiplySymbol002.play("score")
+	await get_tree().create_timer(score_elements_display_delay).timeout
+	$CheeseScoreAnims.show()
+	$CheeseScoreAnims.play("score")
+	# Roll the score!
+	while score != total_score:
+		score = score_roller_helper_func(score, total_score)
+		$ScoreDisplay.text = "= " + str(score)
+		await get_tree().create_timer(score_roller_display_delay).timeout
+	await get_tree().create_timer(score_elements_display_delay).timeout
+	$ScoreDisplay.text = "= " + str(score) + "!"
+
+
+# Helper function for rolling a score to a score_target value, digit by digit.
+func score_roller_helper_func(score : int, score_target : int):
+	var diff = score_target - score
+	if diff > 0:
+		for score_delta in score_roller_deltas:
+			if diff >= score_delta:
+				return score + score_delta
+	elif diff < 0:
+		for score_delta in score_roller_deltas:
+			if diff <= -score_delta:
+				return score - score_delta
+	else:
+		return score
+

@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://cviicny3d63dk"]
+
+[ext_resource type="Script" path="res://scripts/goons/goon_manager.gd" id="1_bv3y5"]
+
+[node name="GoonManager" type="Node"]
+script = ExtResource("1_bv3y5")
+
+[node name="GoonTimer" type="Timer" parent="."]
+
+[connection signal="timeout" from="GoonTimer" to="." method="_on_goon_timer_timeout"]

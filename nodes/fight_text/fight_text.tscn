@@ -1,0 +1,62 @@
+[gd_scene load_steps=11 format=3 uid="uid://buaok7fdc0mlx"]
+
+[ext_resource type="Texture2D" uid="uid://bxgkct0n8iahx" path="res://assets/graphics/fight_text/bonk_chromatic_001.png" id="1_ot8g0"]
+[ext_resource type="Texture2D" uid="uid://bkhmt0y2emk3" path="res://assets/graphics/fight_text/bonk_chromatic_002.png" id="2_v367k"]
+[ext_resource type="Texture2D" uid="uid://chdpx0a252fcl" path="res://assets/graphics/fight_text/bonk_chromatic_003.png" id="3_kmsh3"]
+[ext_resource type="Texture2D" uid="uid://6uo0rgvicnaw" path="res://assets/graphics/fight_text/dong_chromatic_001.png" id="4_q6lpw"]
+[ext_resource type="Texture2D" uid="uid://dvmsjl5h38tfv" path="res://assets/graphics/fight_text/dong_chromatic_002.png" id="5_osbt0"]
+[ext_resource type="Texture2D" uid="uid://bbhigqmx40i5x" path="res://assets/graphics/fight_text/dong_chromatic_003.png" id="6_olgme"]
+[ext_resource type="Texture2D" uid="uid://c0v1ktm2ugp6n" path="res://assets/graphics/fight_text/oof_chromatic_001.png" id="7_osxey"]
+[ext_resource type="Texture2D" uid="uid://dad2p2wjsxehx" path="res://assets/graphics/fight_text/oof_chromatic_002.png" id="8_l25lo"]
+[ext_resource type="Texture2D" uid="uid://do5bgenw02nvk" path="res://assets/graphics/fight_text/oof_chromatic_003.png" id="9_vqnyf"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_cdsma"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_ot8g0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_v367k")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_kmsh3")
+}],
+"loop": true,
+"name": &"bonk",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_q6lpw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_osbt0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_olgme")
+}],
+"loop": true,
+"name": &"dong",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_osxey")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_l25lo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_vqnyf")
+}],
+"loop": true,
+"name": &"oof",
+"speed": 12.0
+}]
+
+[node name="FightText" type="Node"]
+
+[node name="FightTextAnims" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_cdsma")
+animation = &"oof"

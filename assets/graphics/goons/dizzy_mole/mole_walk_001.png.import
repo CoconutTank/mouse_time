@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cc6fmjdbnx4o7"
-path="res://.godot/imported/mouse_sleep_002.png-e6f8b79434ba112fcfc5805a84e26d53.ctex"
+uid="uid://5e43bihelph3"
+path="res://.godot/imported/mole_walk_001.png-0751edd776690af98840a6cd800d2e2b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/graphics/mouse/mouse_sleep_002.png"
-dest_files=["res://.godot/imported/mouse_sleep_002.png-e6f8b79434ba112fcfc5805a84e26d53.ctex"]
+source_file="res://assets/graphics/goons/dizzy_mole/mole_walk_001.png"
+dest_files=["res://.godot/imported/mole_walk_001.png-0751edd776690af98840a6cd800d2e2b.ctex"]
 
 [params]
 

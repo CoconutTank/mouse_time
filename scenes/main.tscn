@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" path="res://scripts/main_script.gd" id="1_idi3s"]
 [ext_resource type="PackedScene" uid="uid://cuc3wniwp88mv" path="res://nodes/cheese.tscn" id="2_7i27o"]
-[ext_resource type="PackedScene" uid="uid://d0wmiadj8rkxa" path="res://nodes/light_cheese.tscn" id="2_nrsgs"]
 [ext_resource type="PackedScene" uid="uid://cagcnvjsihqp4" path="res://scenes/hud_scene.tscn" id="2_qshda"]
+[ext_resource type="PackedScene" uid="uid://cviicny3d63dk" path="res://scenes/goon_manager.tscn" id="3_grn83"]
 [ext_resource type="PackedScene" uid="uid://cxvlnyvc2y1s4" path="res://nodes/player_mouse.tscn" id="3_s77hs"]
 [ext_resource type="AudioStream" uid="uid://bbhfnpcvcb5rw" path="res://assets/audio/cheeseGet001.wav" id="6_j2nvs"]
 [ext_resource type="AudioStream" uid="uid://cb5cwc0x2iu22" path="res://assets/audio/cheeseGet002.wav" id="7_r6bxt"]
@@ -15,7 +15,6 @@
 
 [node name="Main" type="Node"]
 script = ExtResource("1_idi3s")
-light_cheese_blueprint = ExtResource("2_nrsgs")
 
 [node name="Background" type="ColorRect" parent="."]
 offset_right = 1152.0
@@ -42,6 +41,8 @@ wait_time = 3.0
 wait_time = 5.0
 
 [node name="HUD" parent="." instance=ExtResource("2_qshda")]
+
+[node name="GoonManager" parent="." instance=ExtResource("3_grn83")]
 
 [node name="CheeseCursor" parent="." instance=ExtResource("2_7i27o")]
 
@@ -76,3 +77,4 @@ stream = ExtResource("12_xqyru")
 [connection signal="cheese_eaten" from="CheeseCursor" to="." method="_on_cheese_cursor_cheese_eaten"]
 [connection signal="cheese_eaten" from="CheeseCursor" to="PlayerMouse" method="_on_cheese_cursor_cheese_eaten"]
 [connection signal="mouse_goes_to_sleep" from="PlayerMouse" to="." method="_on_player_mouse_mouse_goes_to_sleep"]
+[connection signal="mouse_is_knocked_out" from="PlayerMouse" to="." method="_on_player_mouse_mouse_is_knocked_out"]
