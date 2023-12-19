@@ -56,10 +56,10 @@ func init_goon_spawn_details():
 	# Dizzy Mole spawning details
 	goon_spawn_delay[GOON_TYPE.DIZZY_MOLE] = 4
 	goon_ongoing_spawn_delay[GOON_TYPE.DIZZY_MOLE] = 3
-	goon_max_spawn_count[GOON_TYPE.DIZZY_MOLE] = 5
+	goon_max_spawn_count[GOON_TYPE.DIZZY_MOLE] = 7
 
 	# Fighty Lobster spawning details
-	goon_spawn_delay[GOON_TYPE.FIGHTY_LOBSTER] = 10
+	goon_spawn_delay[GOON_TYPE.FIGHTY_LOBSTER] = 9
 	goon_ongoing_spawn_delay[GOON_TYPE.FIGHTY_LOBSTER] = 4
 	goon_max_spawn_count[GOON_TYPE.FIGHTY_LOBSTER] = 3
 

@@ -23,9 +23,6 @@ window/stretch/mode="canvas_items"
 
 [layer_names]
 
-2d_render/layer_1="Cheese"
-2d_render/layer_2="PlayerMouse"
-2d_render/layer_3="LightCheese"
 2d_physics/layer_1="Cheese"
 2d_physics/layer_2="PlayerMouse"
 2d_physics/layer_3="LightCheese"

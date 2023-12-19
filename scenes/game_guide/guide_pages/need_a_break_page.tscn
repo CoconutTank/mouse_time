@@ -1,0 +1,90 @@
+[gd_scene load_steps=8 format=3 uid="uid://d21sygrye6285"]
+
+[ext_resource type="Script" path="res://scripts/game_guide/guide_pages/need_a_break_page.gd" id="1_qea2o"]
+[ext_resource type="Texture2D" uid="uid://n1c4qavvk2jw" path="res://assets/graphics/mouse/mouse_sleep_right_001.png" id="2_q2rik"]
+[ext_resource type="Texture2D" uid="uid://ccgddtnbcjc5y" path="res://assets/graphics/mouse/mouse_sleep_right_002.png" id="3_t0ef7"]
+[ext_resource type="Texture2D" uid="uid://bjktj3syyyl4r" path="res://assets/graphics/mouse/mouse_knockout_001.png" id="4_sart7"]
+[ext_resource type="Texture2D" uid="uid://v3jmhb41tocc" path="res://assets/graphics/mouse/mouse_knockout_002.png" id="5_ikgf2"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_vt8gc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_q2rik")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_t0ef7")
+}],
+"loop": true,
+"name": &"sleep",
+"speed": 0.75
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6my1o"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_sart7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_ikgf2")
+}],
+"loop": true,
+"name": &"ko",
+"speed": 2.0
+}]
+
+[node name="NeedABreakPage" type="Node2D"]
+script = ExtResource("1_qea2o")
+
+[node name="TextBlockBG" type="ColorRect" parent="."]
+offset_left = 256.0
+offset_top = 200.0
+offset_right = 896.0
+offset_bottom = 584.0
+
+[node name="PageBackground" type="ColorRect" parent="."]
+self_modulate = Color(1, 1, 1, 0.686275)
+offset_right = 1152.0
+offset_bottom = 648.0
+
+[node name="SleepyMouseSprite" type="AnimatedSprite2D" parent="."]
+position = Vector2(320, 160)
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_vt8gc")
+animation = &"sleep"
+
+[node name="KnockedOutMouseSprite" type="AnimatedSprite2D" parent="."]
+position = Vector2(832, 160)
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_6my1o")
+animation = &"ko"
+
+[node name="Title" type="Label" parent="."]
+self_modulate = Color(0, 0, 0, 1)
+offset_left = 384.0
+offset_top = 128.0
+offset_right = 768.0
+offset_bottom = 260.0
+theme_override_font_sizes/font_size = 45
+text = "It's Break Time..."
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="BlackBar" type="ColorRect" parent="."]
+offset_left = 256.0
+offset_top = 192.0
+offset_right = 896.0
+offset_bottom = 198.0
+color = Color(0, 0, 0, 1)
+
+[node name="Details" type="RichTextLabel" parent="."]
+self_modulate = Color(0, 0, 0, 1)
+offset_left = 256.0
+offset_top = 200.0
+offset_right = 896.0
+offset_bottom = 632.0
+theme_override_font_sizes/normal_font_size = 30
+text = "The game ends when the mouse manages to catch up and eat the big cheese. They'll get real sleepy once they finish their pungent meal, so they take a nap and stop moving!
+
+The game also ends if the mouse's vibes fall to 50 or less, which causes them to be knocked out!"

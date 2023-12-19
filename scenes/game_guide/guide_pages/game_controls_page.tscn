@@ -1,0 +1,127 @@
+[gd_scene load_steps=9 format=3 uid="uid://df63vqb76kc8s"]
+
+[ext_resource type="Script" path="res://scripts/game_guide/guide_pages/game_controls_page.gd" id="1_c6vnr"]
+[ext_resource type="Texture2D" uid="uid://c6j1idwrxjspg" path="res://assets/graphics/mouse/mouse_move_001r.png" id="2_58d0r"]
+[ext_resource type="Texture2D" uid="uid://cbrlpg7jfkeom" path="res://assets/graphics/mouse/mouse_move_002r.png" id="3_s1ep2"]
+[ext_resource type="Texture2D" uid="uid://dy0fbylboorxh" path="res://assets/graphics/cheese/cheese.png" id="4_qo1ky"]
+[ext_resource type="Texture2D" uid="uid://bsrqnmihcve4w" path="res://assets/graphics/mouse/mouse_move_001.png" id="5_siywv"]
+[ext_resource type="Texture2D" uid="uid://bi48mfg1vmih4" path="res://assets/graphics/mouse/mouse_move_002.png" id="6_3dvya"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3k30w"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_58d0r")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_s1ep2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_58d0r")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_s1ep2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_qo1ky")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_qo1ky")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_qo1ky")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_qo1ky")
+}],
+"loop": true,
+"name": &"wiggle",
+"speed": 6.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jb5h2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_qo1ky")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_qo1ky")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_qo1ky")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_qo1ky")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_siywv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_3dvya")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_siywv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_3dvya")
+}],
+"loop": true,
+"name": &"wiggle",
+"speed": 6.0
+}]
+
+[node name="GameControlsPage" type="Node2D"]
+script = ExtResource("1_c6vnr")
+
+[node name="TextBlockBG" type="ColorRect" parent="."]
+offset_left = 256.0
+offset_top = 200.0
+offset_right = 896.0
+offset_bottom = 584.0
+
+[node name="PageBackground" type="ColorRect" parent="."]
+self_modulate = Color(1, 1, 1, 0.686275)
+offset_right = 1152.0
+offset_bottom = 648.0
+
+[node name="MouseToCheeseSprite" type="AnimatedSprite2D" parent="."]
+position = Vector2(352, 160)
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_3k30w")
+animation = &"wiggle"
+
+[node name="CheeseToMouseSprite" type="AnimatedSprite2D" parent="."]
+position = Vector2(800, 160)
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_jb5h2")
+animation = &"wiggle"
+
+[node name="Title" type="Label" parent="."]
+self_modulate = Color(0, 0, 0, 1)
+offset_left = 384.0
+offset_top = 128.0
+offset_right = 768.0
+offset_bottom = 260.0
+theme_override_font_sizes/font_size = 45
+text = "Game Controls"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="BlackBar" type="ColorRect" parent="."]
+offset_left = 256.0
+offset_top = 192.0
+offset_right = 896.0
+offset_bottom = 198.0
+color = Color(0, 0, 0, 1)
+
+[node name="Details" type="RichTextLabel" parent="."]
+self_modulate = Color(0, 0, 0, 1)
+offset_left = 256.0
+offset_top = 200.0
+offset_right = 896.0
+offset_bottom = 632.0
+theme_override_font_sizes/normal_font_size = 30
+text = "Just move your (computer) mouse around to move the big cheese, and the mouse will chase after the cheese and eat any little cheese they find along the way!
+
+The mouse's speed is relative to their current vibes, which passively increases over time and each time they eat any cheese."

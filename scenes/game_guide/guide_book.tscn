@@ -1,0 +1,52 @@
+[gd_scene load_steps=8 format=3 uid="uid://boxjvwnluka37"]
+
+[ext_resource type="Script" path="res://scripts/game_guide/guide_book.gd" id="1_t8glj"]
+[ext_resource type="Texture2D" uid="uid://bu77oembvp18q" path="res://assets/graphics/misc/white_cross_red_fill_32x32.png" id="2_oqtlj"]
+[ext_resource type="Texture2D" uid="uid://cxys6igok6xbm" path="res://assets/graphics/misc/white_cross_red_fill_highlighted_32x32.png" id="3_0a065"]
+[ext_resource type="Texture2D" uid="uid://dsu7mhvnq3q86" path="res://assets/graphics/misc/green_arrow_left_32x32.png" id="4_lh4aq"]
+[ext_resource type="Texture2D" uid="uid://dk81gsr5aqd7w" path="res://assets/graphics/misc/green_arrow_left_highlight_32x32.png" id="5_l06mg"]
+[ext_resource type="Texture2D" uid="uid://j438etn4ir6l" path="res://assets/graphics/misc/green_arrow_right_32x32.png" id="6_krae3"]
+[ext_resource type="Texture2D" uid="uid://bejb7rqa8idax" path="res://assets/graphics/misc/green_arrow_right_highlight_32x32.png" id="7_rh22w"]
+
+[node name="GuideBook" type="Node2D"]
+script = ExtResource("1_t8glj")
+
+[node name="GuidePageDisplayLayer" type="Node" parent="."]
+
+[node name="CloseButton" type="TextureButton" parent="."]
+z_index = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = 912.0
+offset_top = 144.0
+offset_right = 944.0
+offset_bottom = 176.0
+grow_horizontal = 0
+texture_normal = ExtResource("2_oqtlj")
+texture_pressed = ExtResource("2_oqtlj")
+texture_hover = ExtResource("3_0a065")
+
+[node name="LeftButton" type="TextureButton" parent="."]
+z_index = 1
+offset_left = 208.0
+offset_top = 208.0
+offset_right = 240.0
+offset_bottom = 240.0
+texture_normal = ExtResource("4_lh4aq")
+texture_pressed = ExtResource("4_lh4aq")
+texture_hover = ExtResource("5_l06mg")
+
+[node name="RightButton" type="TextureButton" parent="."]
+z_index = 1
+offset_left = 912.0
+offset_top = 208.0
+offset_right = 944.0
+offset_bottom = 240.0
+texture_normal = ExtResource("6_krae3")
+texture_pressed = ExtResource("6_krae3")
+texture_hover = ExtResource("7_rh22w")
+
+[connection signal="pressed" from="CloseButton" to="." method="_on_close_button_pressed"]
+[connection signal="pressed" from="LeftButton" to="." method="_on_left_button_pressed"]
+[connection signal="pressed" from="RightButton" to="." method="_on_right_button_pressed"]

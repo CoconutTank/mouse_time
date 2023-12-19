@@ -19,8 +19,8 @@ var on_screen = true
 var move_horizontal = false
 var move_right = false
 var move_down = false
-var my_spawn_area_min
-var my_spawn_area_max
+var play_screen_area_min
+var play_screen_area_max
 
 
 # Called when the node enters the scene tree for the first time.
@@ -47,14 +47,14 @@ func on_goon_tick():
 		if on_screen:
 			if move_horizontal:
 				if move_right:
-					on_screen = position.x < my_spawn_area_max.x
+					on_screen = position.x < play_screen_area_max.x
 				else:
-					on_screen = position.x > my_spawn_area_min.x
+					on_screen = position.x > play_screen_area_min.x
 			else:
 				if move_down:
-					on_screen = position.y < my_spawn_area_max.y
+					on_screen = position.y < play_screen_area_max.y
 				else:
-					on_screen = position.y > my_spawn_area_min.y
+					on_screen = position.y > play_screen_area_min.y
 		if !on_screen:
 			offscreen_time -= 1
 			if offscreen_time <= 0:
@@ -80,8 +80,8 @@ func set_spawn_position(spawn_area_min : Vector2, spawn_area_max : Vector2):
 	var y_1 = 0
 	var x_2 = 0
 	var y_2 = 0
-	my_spawn_area_min = spawn_area_min
-	my_spawn_area_max = spawn_area_max
+	play_screen_area_min = spawn_area_min
+	play_screen_area_max = spawn_area_max
 	move_horizontal = randi() % 2 == 0
 	if move_horizontal:
 		y_1 = randi_range(spawn_area_min.y, spawn_area_max.y)

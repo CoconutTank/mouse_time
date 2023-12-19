@@ -5,7 +5,7 @@ signal start_game
 signal toggle_sound
 
 @export var game_title : String
-@export var stow_exit_button = false
+@export var show_exit_button = true
 
 var showing_how_to_play = false
 
@@ -13,7 +13,7 @@ var how_to_play_button_text = "How To Play"
 var how_to_play_button_close_text = "Return"
 
 var sound_on : bool
-var sound_on_button_text = "Sound On ♫"
+var sound_on_button_text = "Sound On"
 var sound_off_button_text = "Sound Off"
 
 var game_ui_components = []
@@ -39,6 +39,11 @@ const score_roller_deltas = [
 	1
 ]
 
+
+const guide_book_scene_path = "res://scenes/game_guide/guide_book.tscn"
+const goon_gallery_scene_path = "res://scenes/goon_gallery/goon_gallery.tscn"
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	reset_score()
@@ -54,7 +59,7 @@ func _ready():
 	]
 	$HowToPlayText.hide()
 	start_animated_ui(false)
-	if (stow_exit_button):
+	if (!show_exit_button):
 		$ExitGameButton.hide()
 	sound_on = false
 	nuclear_knockout_detected = false
@@ -68,6 +73,7 @@ func _process(delta):
 func _on_start_button_pressed():
 	$StartButton.hide()
 	$HowToPlayButton.hide()
+	$WhatAreGoonsButton.hide()
 	$ExitGameButton.hide()
 	$ToggleSoundButton.hide()
 	$MouseVibesAnims.play("mouse_still")
@@ -76,10 +82,11 @@ func _on_start_button_pressed():
 
 
 func _on_how_to_play_button_pressed():
-	if (showing_how_to_play):
-		close_how_to_play()
-	else:
-		show_how_to_play()
+	add_child(load(guide_book_scene_path).instantiate())
+
+
+func _on_button_pressed():
+	add_child(load(goon_gallery_scene_path).instantiate())
 
 
 # Used to update the message label used for the game.
@@ -106,30 +113,10 @@ func hide_message():
 func show_buttons():
 	$StartButton.show()
 	$HowToPlayButton.show()
+	$WhatAreGoonsButton.show()
 	$ToggleSoundButton.show()
-	if (!stow_exit_button):
+	if (show_exit_button):
 		$ExitGameButton.show()
-
-
-func show_how_to_play():
-	$StartButton.hide()
-	$ExitGameButton.hide()
-	$ToggleSoundButton.hide()
-	display_game_ui(false)
-	$HowToPlayText.show()
-	$HowToPlayButton.text = how_to_play_button_close_text
-	showing_how_to_play = true
-
-
-func close_how_to_play():
-	$HowToPlayText.hide()
-	$StartButton.show()
-	$ToggleSoundButton.show()
-	if (!stow_exit_button):
-		$ExitGameButton.show()
-	display_game_ui(true)
-	$HowToPlayButton.text = how_to_play_button_text
-	showing_how_to_play = false
 
 
 # Use this function to toggle whether or not the normal game UI is visible.
@@ -263,4 +250,3 @@ func score_roller_helper_func(score : int, score_target : int):
 				return score - score_delta
 	else:
 		return score
-

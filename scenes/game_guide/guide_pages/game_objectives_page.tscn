@@ -1,0 +1,106 @@
+[gd_scene load_steps=10 format=3 uid="uid://b6gol507kyh54"]
+
+[ext_resource type="Script" path="res://scripts/game_guide/guide_pages/game_objectives_page.gd" id="1_3jraj"]
+[ext_resource type="Texture2D" uid="uid://cfn5q33we38pq" path="res://assets/graphics/multi_color_cheese/multi_color_cheese_001.png" id="2_c0s1f"]
+[ext_resource type="Texture2D" uid="uid://bygtlhsqc6e2n" path="res://assets/graphics/multi_color_cheese/multi_color_cheese_002.png" id="3_ndcne"]
+[ext_resource type="Texture2D" uid="uid://w5ex1cq7ica4" path="res://assets/graphics/multi_color_cheese/multi_color_cheese_003.png" id="4_srlyn"]
+[ext_resource type="Texture2D" uid="uid://c7yh4pwghe8rc" path="res://assets/graphics/timer/timer_squashed.png" id="5_pjese"]
+[ext_resource type="Texture2D" uid="uid://d268e3wfe7h10" path="res://assets/graphics/timer/timer_stretched_up_right.png" id="6_iorkm"]
+[ext_resource type="Texture2D" uid="uid://bxbe7ksqukeok" path="res://assets/graphics/timer/timer_stretched_up_left.png" id="7_tyjjs"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2aqfi"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_c0s1f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_ndcne")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_srlyn")
+}],
+"loop": true,
+"name": &"shimmer",
+"speed": 2.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_i8g30"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_pjese")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_iorkm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_pjese")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_tyjjs")
+}],
+"loop": true,
+"name": &"shimmer",
+"speed": 2.0
+}]
+
+[node name="GameObjectivesPage" type="Node2D"]
+script = ExtResource("1_3jraj")
+
+[node name="TextBlockBG" type="ColorRect" parent="."]
+offset_left = 256.0
+offset_top = 200.0
+offset_right = 896.0
+offset_bottom = 592.0
+
+[node name="PageBackground" type="ColorRect" parent="."]
+self_modulate = Color(1, 1, 1, 0.686275)
+offset_right = 1152.0
+offset_bottom = 648.0
+
+[node name="MultiCheeseSprite" type="AnimatedSprite2D" parent="."]
+position = Vector2(320, 160)
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_2aqfi")
+animation = &"shimmer"
+
+[node name="TimerSprite" type="AnimatedSprite2D" parent="."]
+position = Vector2(832, 152)
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_i8g30")
+animation = &"shimmer"
+
+[node name="Title" type="Label" parent="."]
+self_modulate = Color(0, 0, 0, 1)
+offset_left = 384.0
+offset_top = 128.0
+offset_right = 768.0
+offset_bottom = 260.0
+theme_override_font_sizes/font_size = 45
+text = "It's Mouse Time!"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="BlackBar" type="ColorRect" parent="."]
+offset_left = 256.0
+offset_top = 192.0
+offset_right = 896.0
+offset_bottom = 198.0
+color = Color(0, 0, 0, 1)
+
+[node name="Details" type="RichTextLabel" parent="."]
+self_modulate = Color(0, 0, 0, 1)
+offset_left = 256.0
+offset_top = 200.0
+offset_right = 896.0
+offset_bottom = 632.0
+theme_override_font_sizes/normal_font_size = 30
+text = "Direct the mouse to keep eating cheese for as long as possible!
+
+At the end of the game, your score is 
+- Cheese
+- Time
+- and Vibes
+
+All multiplied together!"

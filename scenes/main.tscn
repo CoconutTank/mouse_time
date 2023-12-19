@@ -40,8 +40,6 @@ wait_time = 3.0
 [node name="LightCheeseSpawnTimer2" type="Timer" parent="."]
 wait_time = 5.0
 
-[node name="HUD" parent="." instance=ExtResource("2_qshda")]
-
 [node name="GoonManager" parent="." instance=ExtResource("3_grn83")]
 
 [node name="CheeseCursor" parent="." instance=ExtResource("2_7i27o")]
@@ -69,12 +67,14 @@ stream = ExtResource("11_vf0ek")
 [node name="TadaSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("12_xqyru")
 
+[node name="HUD" parent="." instance=ExtResource("2_qshda")]
+
 [connection signal="timeout" from="PerSecondTimer" to="." method="_on_per_second_timer_timeout"]
 [connection signal="timeout" from="LightCheeseSpawnTimer" to="." method="_on_light_cheese_spawn_timer_timeout"]
 [connection signal="timeout" from="LightCheeseSpawnTimer2" to="." method="_on_light_cheese_spawn_timer_timeout"]
-[connection signal="start_game" from="HUD" to="." method="new_game"]
-[connection signal="toggle_sound" from="HUD" to="." method="_on_hud_toggle_sound"]
 [connection signal="cheese_eaten" from="CheeseCursor" to="." method="_on_cheese_cursor_cheese_eaten"]
 [connection signal="cheese_eaten" from="CheeseCursor" to="PlayerMouse" method="_on_cheese_cursor_cheese_eaten"]
 [connection signal="mouse_goes_to_sleep" from="PlayerMouse" to="." method="_on_player_mouse_mouse_goes_to_sleep"]
 [connection signal="mouse_is_knocked_out" from="PlayerMouse" to="." method="_on_player_mouse_mouse_is_knocked_out"]
+[connection signal="start_game" from="HUD" to="." method="new_game"]
+[connection signal="toggle_sound" from="HUD" to="." method="_on_hud_toggle_sound"]

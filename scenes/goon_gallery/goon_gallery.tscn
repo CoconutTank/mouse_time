@@ -1,0 +1,52 @@
+[gd_scene load_steps=8 format=3 uid="uid://ckhdwnjebwhff"]
+
+[ext_resource type="Script" path="res://scripts/goon_gallery/goon_gallery_script.gd" id="1_yi1ve"]
+[ext_resource type="Texture2D" uid="uid://bu77oembvp18q" path="res://assets/graphics/misc/white_cross_red_fill_32x32.png" id="2_jgahu"]
+[ext_resource type="Texture2D" uid="uid://cxys6igok6xbm" path="res://assets/graphics/misc/white_cross_red_fill_highlighted_32x32.png" id="3_xnj7u"]
+[ext_resource type="Texture2D" uid="uid://dsu7mhvnq3q86" path="res://assets/graphics/misc/green_arrow_left_32x32.png" id="4_lq27w"]
+[ext_resource type="Texture2D" uid="uid://dk81gsr5aqd7w" path="res://assets/graphics/misc/green_arrow_left_highlight_32x32.png" id="5_yfg02"]
+[ext_resource type="Texture2D" uid="uid://j438etn4ir6l" path="res://assets/graphics/misc/green_arrow_right_32x32.png" id="6_qkrre"]
+[ext_resource type="Texture2D" uid="uid://bejb7rqa8idax" path="res://assets/graphics/misc/green_arrow_right_highlight_32x32.png" id="7_2etef"]
+
+[node name="GoonGallery" type="Node2D"]
+script = ExtResource("1_yi1ve")
+
+[node name="GoonPageDisplayLayer" type="Node" parent="."]
+
+[node name="CloseButton" type="TextureButton" parent="."]
+z_index = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = 912.0
+offset_top = 144.0
+offset_right = 944.0
+offset_bottom = 176.0
+grow_horizontal = 0
+texture_normal = ExtResource("2_jgahu")
+texture_pressed = ExtResource("2_jgahu")
+texture_hover = ExtResource("3_xnj7u")
+
+[node name="LeftButton" type="TextureButton" parent="."]
+z_index = 1
+offset_left = 208.0
+offset_top = 208.0
+offset_right = 240.0
+offset_bottom = 240.0
+texture_normal = ExtResource("4_lq27w")
+texture_pressed = ExtResource("4_lq27w")
+texture_hover = ExtResource("5_yfg02")
+
+[node name="RightButton" type="TextureButton" parent="."]
+z_index = 1
+offset_left = 912.0
+offset_top = 208.0
+offset_right = 944.0
+offset_bottom = 240.0
+texture_normal = ExtResource("6_qkrre")
+texture_pressed = ExtResource("6_qkrre")
+texture_hover = ExtResource("7_2etef")
+
+[connection signal="pressed" from="CloseButton" to="." method="_on_close_button_pressed"]
+[connection signal="pressed" from="LeftButton" to="." method="_on_left_button_pressed"]
+[connection signal="pressed" from="RightButton" to="." method="_on_right_button_pressed"]
