@@ -13,8 +13,6 @@ var how_to_play_button_text = "How To Play"
 var how_to_play_button_close_text = "Return"
 
 var sound_on : bool
-var sound_on_button_text = "Sound On"
-var sound_off_button_text = "Sound Off"
 
 var game_ui_components = []
 
@@ -75,7 +73,10 @@ func _on_start_button_pressed():
 	$HowToPlayButton.hide()
 	$WhatAreGoonsButton.hide()
 	$ExitGameButton.hide()
-	$ToggleSoundButton.hide()
+	if sound_on:
+		$SoundOnButton.hide()
+	else:
+		$SoundOffButton.hide()
 	$MouseVibesAnims.play("mouse_still")
 	display_game_ui(true)
 	start_game.emit()
@@ -114,7 +115,10 @@ func show_buttons():
 	$StartButton.show()
 	$HowToPlayButton.show()
 	$WhatAreGoonsButton.show()
-	$ToggleSoundButton.show()
+	if sound_on:
+		$SoundOnButton.show()
+	else:
+		$SoundOffButton.show()
 	if (show_exit_button):
 		$ExitGameButton.show()
 
@@ -172,17 +176,6 @@ func update_vibe_display(vibes : int):
 
 func _on_exit_game_button_pressed():
 	get_tree().quit()
-
-
-func _on_toggle_sound_button_pressed():
-	toggle_sound.emit()
-	if (sound_on):
-		sound_on = false
-		$ToggleSoundButton.text = sound_off_button_text
-	else:
-		sound_on = true
-		$ToggleSoundButton.text = sound_on_button_text
-		$SoundToggledOnSound.play()
 
 
 func reset_score():
@@ -250,3 +243,18 @@ func score_roller_helper_func(score : int, score_target : int):
 				return score - score_delta
 	else:
 		return score
+
+
+func _on_sound_on_button_pressed():
+	toggle_sound.emit()
+	$SoundOnButton.hide()
+	$SoundOffButton.show()
+	sound_on = false
+
+
+func _on_sound_off_button_pressed():
+	toggle_sound.emit()
+	$SoundOffButton.hide()
+	$SoundOnButton.show()
+	$SoundToggledOnSound.play()
+	sound_on = true

@@ -1,8 +1,12 @@
-[gd_scene load_steps=34 format=3 uid="uid://cagcnvjsihqp4"]
+[gd_scene load_steps=38 format=3 uid="uid://cagcnvjsihqp4"]
 
 [ext_resource type="Script" path="res://scripts/hud_script.gd" id="1_oq0hi"]
+[ext_resource type="Texture2D" uid="uid://dc0x4niq7gs37" path="res://assets/graphics/misc/sound_on_32x32.png" id="2_pfxss"]
+[ext_resource type="Texture2D" uid="uid://f56eiwalvhmp" path="res://assets/graphics/misc/sound_on_highlight_32x32.png" id="3_vqv3u"]
+[ext_resource type="Texture2D" uid="uid://cm55bf1m7o58j" path="res://assets/graphics/misc/sound_off_32x32.png" id="4_4xy0o"]
 [ext_resource type="Texture2D" uid="uid://1xosr2vefejp" path="res://assets/graphics/mouse/mouse_sleep_left_001.png" id="4_fq8ek"]
 [ext_resource type="Texture2D" uid="uid://dw2jws0wjo2uu" path="res://assets/graphics/mouse/mouse_sleep_left_002.png" id="5_0ooid"]
+[ext_resource type="Texture2D" uid="uid://caarlxxsufcl4" path="res://assets/graphics/misc/sound_off_highlight_32x32.png" id="5_pj1pw"]
 [ext_resource type="Texture2D" uid="uid://bsrqnmihcve4w" path="res://assets/graphics/mouse/mouse_move_001.png" id="6_veyqw"]
 [ext_resource type="Texture2D" uid="uid://ds5xdgiokqac6" path="res://assets/graphics/timer/timer_standing.png" id="7_g3y7o"]
 [ext_resource type="Texture2D" uid="uid://bi48mfg1vmih4" path="res://assets/graphics/mouse/mouse_move_002.png" id="7_nbvow"]
@@ -300,6 +304,7 @@ animations = [{
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource("1_oq0hi")
 game_title = "Mouse Time"
+show_exit_button = false
 
 [node name="UIBar" type="ColorRect" parent="."]
 offset_top = -1.0
@@ -360,13 +365,24 @@ grow_vertical = 0
 theme_override_font_sizes/font_size = 45
 text = "Exit Game"
 
-[node name="ToggleSoundButton" type="Button" parent="."]
-offset_left = 1016.0
+[node name="SoundOnButton" type="TextureButton" parent="."]
+visible = false
+offset_left = 1056.0
 offset_top = 584.0
-offset_right = 1128.0
-offset_bottom = 624.0
-text = "Sound Off
-"
+offset_right = 1088.0
+offset_bottom = 616.0
+texture_normal = ExtResource("2_pfxss")
+texture_pressed = ExtResource("2_pfxss")
+texture_hover = ExtResource("3_vqv3u")
+
+[node name="SoundOffButton" type="TextureButton" parent="."]
+offset_left = 1056.0
+offset_top = 584.0
+offset_right = 1088.0
+offset_bottom = 616.0
+texture_normal = ExtResource("4_4xy0o")
+texture_pressed = ExtResource("4_4xy0o")
+texture_hover = ExtResource("5_pj1pw")
 
 [node name="MessageLabel" type="Label" parent="."]
 visible = false
@@ -520,4 +536,5 @@ autowrap_mode = 2
 [connection signal="pressed" from="HowToPlayButton" to="." method="_on_how_to_play_button_pressed"]
 [connection signal="pressed" from="WhatAreGoonsButton" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="ExitGameButton" to="." method="_on_exit_game_button_pressed"]
-[connection signal="pressed" from="ToggleSoundButton" to="." method="_on_toggle_sound_button_pressed"]
+[connection signal="pressed" from="SoundOnButton" to="." method="_on_sound_on_button_pressed"]
+[connection signal="pressed" from="SoundOffButton" to="." method="_on_sound_off_button_pressed"]

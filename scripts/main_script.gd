@@ -127,7 +127,8 @@ func cheese_eaten():
 
 # Increases the mouse's vibes, and also updates the vibes counter display.
 func speed_up(speed_increase : int):
-	if $PlayerMouse.active: $PlayerMouse.vibes = $PlayerMouse.vibes + speed_increase
+	if $PlayerMouse.active:
+		$PlayerMouse.vibes = $PlayerMouse.vibes + speed_increase
 
 
 # Displays the get ready countdown at the start of the game.
