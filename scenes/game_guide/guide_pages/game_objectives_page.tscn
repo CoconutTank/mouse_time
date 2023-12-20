@@ -95,12 +95,12 @@ offset_left = 256.0
 offset_top = 200.0
 offset_right = 896.0
 offset_bottom = 632.0
-theme_override_font_sizes/normal_font_size = 30
-text = "Direct the mouse to keep eating cheese for as long as possible!
+theme_override_font_sizes/normal_font_size = 28
+text = "Keep the mouse moving and eating cheese for as long as possible!
 
-At the end of the game, your score is 
+At the end of the game, your score is the following multiplied together:
 - Cheese
 - Time
-- and Vibes
+- and Vibes!
 
-All multiplied together!"
+These stats are visible at the top of the screen."
