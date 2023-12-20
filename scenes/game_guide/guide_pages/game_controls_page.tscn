@@ -122,6 +122,6 @@ offset_top = 200.0
 offset_right = 896.0
 offset_bottom = 632.0
 theme_override_font_sizes/normal_font_size = 30
-text = "Just move your (computer) mouse around to move the big cheese, and the mouse will chase after the cheese and eat any little cheese they find along the way!
+text = "Move the big cheese around using your (computer) mouse, and the mouse will chase after that big cheese and eat any little cheese they find along the way!
 
 The mouse's speed is relative to their current vibes, which passively increases over time and each time they eat any cheese."

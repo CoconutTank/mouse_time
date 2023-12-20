@@ -32,6 +32,11 @@ var cheese_collect_sounds = []
 var sound_on : bool
 
 const light_cheese_spawn_offset := 75
+var light_cheese_spawn_area_min : Vector2
+var light_cheese_spawn_area_max : Vector2
+
+const chance_of_cheese_on_first_second := 30
+const chance_of_cheese_on_second_second := 60
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -46,6 +51,12 @@ func _ready():
 	spawn_area_max = Vector2(
 		$SpawnArea.position.x + $SpawnArea.size.x, 
 		$SpawnArea.position.y + $SpawnArea.size.y)
+	light_cheese_spawn_area_min = Vector2(
+		$SpawnArea.position.x + light_cheese_spawn_offset,
+		$SpawnArea.position.y + light_cheese_spawn_offset)
+	light_cheese_spawn_area_max = Vector2(
+		$SpawnArea.position.x + $SpawnArea.size.x - light_cheese_spawn_offset, 
+		$SpawnArea.position.y + $SpawnArea.size.y - light_cheese_spawn_offset)
 	$CheeseCursor.set_play_area(play_area_min, play_area_max)
 	cheese_collect_sounds = [
 		$CheeseCollectSound001,
@@ -86,6 +97,7 @@ func new_game():
 	$PerSecondTimer.start()
 	$LightCheeseSpawnTimer.start()
 	$LightCheeseSpawnTimer2.start()
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	initiate_cheese_cursor()
 	active = true
 	$GoonManager.get_node("GoonTimer").start()
@@ -96,6 +108,7 @@ func new_game():
 # interact with the game again, using the buttons that show up at the start of
 # the game.
 func game_over():
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	active = false
 	$PerSecondTimer.stop()
 	$LightCheeseSpawnTimer.stop()
@@ -110,16 +123,24 @@ func game_over():
 	$HUD.show_buttons()
 
 
-# Creates a light cheese at the given position. Also attaches a callback to the
-# light cheese that waits on the "light_cheese_eaten" signal and calls a
+# Creates a light cheese within the designated area. Also attaches a callback
+# to the light cheese that waits on the "light_cheese_eaten" signal and calls a
 # function in this script. This connection must be done at run-time, since
 # the light cheese object only exists during run-time (and not in the editor).
-func create_light_cheese_at(pos):
+func spawn_light_cheese(pos):
 	var light_cheese = light_cheese_blueprint.instantiate()
 	add_child(light_cheese)
 	light_cheese.connect(
 		"light_cheese_eaten", Callable(self, "_on_light_cheese_light_cheese_eaten"))
 	light_cheese.start(pos)
+
+
+func get_random_point_within_area(
+		area_min : Vector2,
+		area_max : Vector2):
+	return Vector2(
+		randi_range(area_min.x, area_max.x),
+		randi_range(area_min.y, area_max.y))
 
 
 # A cheese is eaten, and the score is updated.
@@ -167,6 +188,10 @@ func _on_per_second_timer_timeout():
 		game_timer += 1
 		$HUD.update_time_counter(game_timer)
 		$PlayerMouse.vibes += $PlayerMouse.minor_vibes_boost
+		if game_timer == 1 && randi_range(1, 100) <= chance_of_cheese_on_first_second:
+			spawn_light_cheese(get_random_point_within_area(light_cheese_spawn_area_min, light_cheese_spawn_area_max))
+		if game_timer == 2 && randi_range(1, 100) <= chance_of_cheese_on_second_second:
+			spawn_light_cheese(get_random_point_within_area(light_cheese_spawn_area_min, light_cheese_spawn_area_max))
 
 
 # Called each time the light cheese spawn timers time out, which are currently
@@ -174,10 +199,7 @@ func _on_per_second_timer_timeout():
 # centered area of the play area, and should not be spawning near the edges.
 func _on_light_cheese_spawn_timer_timeout():
 	if (active):
-		create_light_cheese_at(
-			Vector2(
-				randi_range(spawn_area_min.x + light_cheese_spawn_offset, spawn_area_max.x - light_cheese_spawn_offset),
-				randi_range(spawn_area_min.y + light_cheese_spawn_offset, spawn_area_max.y - light_cheese_spawn_offset)))
+		spawn_light_cheese(get_random_point_within_area(light_cheese_spawn_area_min, light_cheese_spawn_area_max))
 
 
 # This function is triggered upon the mouse going to sleep. It calls the
