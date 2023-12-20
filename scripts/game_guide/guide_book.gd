@@ -25,7 +25,8 @@ func _ready():
 	else:
 		$CurrentPage.hide()
 		$PageSlash.hide()
-		$CloseButton.hide()
+		$MaxPage.hide()
+		$RightButton.hide()
 		$LeftButton.hide()
 
 
