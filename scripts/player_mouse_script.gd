@@ -8,8 +8,8 @@ signal mouse_goes_to_sleep
 signal goon_touched(goon, me)
 
 @export var vibes = 100.0
-@export var minor_speed_up = 2.0
-@export var major_speed_up = 5.0
+@export var minor_vibes_boost = 2.0
+@export var major_vibes_boost = 5.0
 
 # Size of the game window.
 var screen_size

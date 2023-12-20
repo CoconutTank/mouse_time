@@ -63,6 +63,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	$HUD.update_vibe_display($PlayerMouse.vibes)
 	if active:
 		$PlayerMouse.move_to(delta, $CheeseCursor.position)
 
@@ -127,12 +128,6 @@ func cheese_eaten():
 	$HUD.update_cheese_counter(cheese_counter)
 
 
-# Increases the mouse's vibes, and also updates the vibes counter display.
-func speed_up(speed_increase : int):
-	if $PlayerMouse.active:
-		$PlayerMouse.vibes = $PlayerMouse.vibes + speed_increase
-
-
 # Displays the get ready countdown at the start of the game.
 func get_ready_event():
 	for msg in get_ready_messages:
@@ -171,8 +166,7 @@ func _on_per_second_timer_timeout():
 	if (active):
 		game_timer += 1
 		$HUD.update_time_counter(game_timer)
-		speed_up($PlayerMouse.minor_speed_up)
-		$HUD.update_vibe_display($PlayerMouse.vibes)
+		$PlayerMouse.vibes += $PlayerMouse.minor_vibes_boost
 
 
 # Called each time the light cheese spawn timers time out, which are currently
@@ -215,4 +209,4 @@ func _on_light_cheese_light_cheese_eaten():
 	if (sound_on):
 		cheese_collect_sounds[randi() % cheese_collect_sounds.size()].play()
 	cheese_eaten()
-	speed_up($PlayerMouse.major_speed_up)
+	$PlayerMouse.vibes += $PlayerMouse.major_vibes_boost
