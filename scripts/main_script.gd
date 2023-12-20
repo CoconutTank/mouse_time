@@ -31,6 +31,8 @@ var cheese_collect_sounds = []
 
 var sound_on : bool
 
+const light_cheese_spawn_offset := 75
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	play_area_min = Vector2($PlayArea.position.x, $PlayArea.position.y)
@@ -180,8 +182,8 @@ func _on_light_cheese_spawn_timer_timeout():
 	if (active):
 		create_light_cheese_at(
 			Vector2(
-				randi_range(spawn_area_min.x, spawn_area_max.x),
-				randi_range(spawn_area_min.y, spawn_area_max.y)))
+				randi_range(spawn_area_min.x + light_cheese_spawn_offset, spawn_area_max.x - light_cheese_spawn_offset),
+				randi_range(spawn_area_min.y + light_cheese_spawn_offset, spawn_area_max.y - light_cheese_spawn_offset)))
 
 
 # This function is triggered upon the mouse going to sleep. It calls the

@@ -472,7 +472,7 @@ animation = &"mouse_knockout"
 stream = ExtResource("18_xv236")
 
 [node name="ScoreDisplayBar" type="ColorRect" parent="."]
-self_modulate = Color(0.941176, 0.247059, 0.592157, 0.462745)
+self_modulate = Color(0.941176, 0.247059, 0.592157, 0.54902)
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
