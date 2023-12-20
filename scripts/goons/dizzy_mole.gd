@@ -37,12 +37,26 @@ func spawn():
 	await get_tree().create_timer(emerge_soon_anim_time).timeout
 	$DizzyMoleAnims.play("walk")
 	if game_is_active:
+		active = true
+		check_emerge_collision()
 		direction = randf_range(0.0, 2*PI)
 		linear_velocity = Vector2(speed, 0.0).rotated(direction)
 		$DizzyMoleAnims.flip_h = linear_velocity.x < 0
 		timed_life = max_timed_life
 		change_direction_time = randi_range(min_change_direction_time, max_change_direction_time)
-		active = true
+
+
+func check_emerge_collision():
+	var space_state = get_world_2d().direct_space_state
+	var query = PhysicsShapeQueryParameters2D.new()
+	query.collide_with_areas = true
+	query.shape_rid = $DizzyMoleCollision.shape.get_rid()
+	query.transform = $DizzyMoleCollision.get_global_transform()
+	var collisions = space_state.intersect_shape(query)	
+	for c in collisions:
+		if c.collider is PlayerMouse:
+			# Force a fight!
+			c.collider.start_a_fight(self)
 
 
 func despawn():

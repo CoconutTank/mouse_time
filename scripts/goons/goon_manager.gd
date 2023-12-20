@@ -21,7 +21,7 @@ var goon_max_spawn_count = {}
 var goon_total_max_spawn_count
 
 
-const fight_text_duration = 1.0
+const fight_text_duration = 0.5
 const fight_cloud_shrink_duration = 0.1
 var fight_text_anim
 var fight_cloud_anim
@@ -69,24 +69,6 @@ func init_fight_cloud_anims():
 	fight_cloud_anim = load("res://nodes/fight_text/fight_cloud.tscn")
 
 
-# Spawns a fight cloud with random fight text at the given position.
-func show_random_fight_cloud_at(pos : Vector2):
-	var fight_cloud = fight_cloud_anim.instantiate()
-	var fight_text = fight_text_anim.instantiate()
-	fight_cloud.get_node("FightCloudAnims").position = pos
-	fight_text.get_node("FightTextAnims").position = pos
-	add_child(fight_cloud)
-	add_child(fight_text)
-	var fight_text_names = fight_text.get_node("FightTextAnims").sprite_frames.get_animation_names()
-	fight_cloud.get_node("FightCloudAnims").play("default")
-	fight_text.get_node("FightTextAnims").play(fight_text_names[randi() % fight_text_names.size()])
-	await get_tree().create_timer(fight_text_duration).timeout
-	fight_text.queue_free()
-	fight_cloud.get_node("FightCloudAnims").play("shrink")
-	await get_tree().create_timer(fight_cloud_shrink_duration).timeout
-	fight_cloud.queue_free()
-
-
 # Spawns a goon of the given type.
 # Each goon handles its own spawning positioning.
 # If an invalid goon type is specified, null is returned.
@@ -121,6 +103,24 @@ func goon_fight(goon, opponent):
 		if opponent.keep_going():
 			opponent.active = true
 			opponent.activate_invul()
+
+
+# Spawns a fight cloud with random fight text at the given position.
+func show_random_fight_cloud_at(pos : Vector2):
+	var fight_cloud = fight_cloud_anim.instantiate()
+	var fight_text = fight_text_anim.instantiate()
+	fight_cloud.get_node("FightCloudAnims").position = pos
+	fight_text.get_node("FightTextAnims").position = pos
+	add_child(fight_cloud)
+	add_child(fight_text)
+	var fight_text_names = fight_text.get_node("FightTextAnims").sprite_frames.get_animation_names()
+	fight_cloud.get_node("FightCloudAnims").play("default")
+	fight_text.get_node("FightTextAnims").play(fight_text_names[randi() % fight_text_names.size()])
+	await get_tree().create_timer(fight_text_duration).timeout
+	fight_text.queue_free()
+	fight_cloud.get_node("FightCloudAnims").play("shrink")
+	await get_tree().create_timer(fight_cloud_shrink_duration).timeout
+	fight_cloud.queue_free()
 
 
 func goon_type_to_string(goon_type : GOON_TYPE):

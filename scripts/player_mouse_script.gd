@@ -8,7 +8,7 @@ signal mouse_goes_to_sleep
 signal goon_touched(goon, me)
 
 @export var vibes = 100.0
-@export var minor_speed_up = 3.0
+@export var minor_speed_up = 2.0
 @export var major_speed_up = 5.0
 
 # Size of the game window.
@@ -93,6 +93,10 @@ func play_mouse_eating_anim():
 
 
 func _on_body_entered(body):
+	start_a_fight(body)
+
+
+func start_a_fight(body):
 	if active && body.has_method("is_an_active_goon") && body.is_an_active_goon():
 		goon_touched.emit(body, self)
 

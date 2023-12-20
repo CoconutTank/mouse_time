@@ -23,7 +23,7 @@ var xtreme_vibe_limit = 400
 var nuclear_knockout_detected = false
 
 
-const score_elements_display_delay = 0.75
+const score_elements_display_delay = 0.5
 const score_roller_display_delay = 0.025
 const score_roller_deltas = [
 	100000000,
