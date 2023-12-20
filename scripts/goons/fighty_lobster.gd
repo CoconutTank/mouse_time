@@ -6,7 +6,8 @@ const goon_type = GoonManager.GOON_TYPE.FIGHTY_LOBSTER
 
 
 const max_offscreen_time = 2
-var speed = 75.0
+var min_speed = 25.0
+var max_speed = 125.0
 var offscreen_time = 0
 var direction = 0.0
 
@@ -36,10 +37,10 @@ func _process(delta):
 func spawn():
 	$FightyLobsterAnims.play("walk")
 	if game_is_active:
-		linear_velocity = Vector2(speed, 0.0).rotated(direction)
+		active = true
+		linear_velocity = Vector2(randf_range(min_speed, max_speed), 0.0).rotated(direction)
 		$FightyLobsterAnims.flip_h = linear_velocity.x < 0
 		offscreen_time = max_offscreen_time
-		active = true
 
 
 func on_goon_tick():

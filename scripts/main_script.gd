@@ -31,10 +31,15 @@ var cheese_collect_sounds = []
 
 var sound_on : bool
 
+# Used to determine the available spawn area parameters for light cheese.
+# Light cheese will spawn a little further away from the borders of the play
+# area.
 const light_cheese_spawn_offset := 75
 var light_cheese_spawn_area_min : Vector2
 var light_cheese_spawn_area_max : Vector2
 
+# To make the first two seconds less monotonous, there's a chance that little
+# cheeses will spawn during this time.
 const chance_of_cheese_on_first_second := 30
 const chance_of_cheese_on_second_second := 60
 
@@ -73,6 +78,9 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
+# The vibe counter is updated as often as possible. There are many lines of
+# logic that can manipulate the vibe counter, so this way of updating is meant
+# to capture the actual vibe counter value as accurately as possible. 
 func _process(delta):
 	$HUD.update_vibe_display($PlayerMouse.vibes)
 	if active:
@@ -135,6 +143,7 @@ func spawn_light_cheese(pos):
 	light_cheese.start(pos)
 
 
+# Get a random point within an area using the given parameters.
 func get_random_point_within_area(
 		area_min : Vector2,
 		area_max : Vector2):
@@ -143,7 +152,7 @@ func get_random_point_within_area(
 		randi_range(area_min.y, area_max.y))
 
 
-# A cheese is eaten, and the score is updated.
+# A cheese is eaten, and the cheese counter is updated.
 func cheese_eaten():
 	cheese_counter += 1
 	$HUD.update_cheese_counter(cheese_counter)

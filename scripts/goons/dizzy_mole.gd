@@ -15,7 +15,8 @@ const min_change_direction_time = 1
 
 var active = false
 var game_is_active = true
-var speed = 30.0
+var min_speed = 5.0
+var max_speed = 55.0
 var timed_life = 0
 var direction = 0.0
 var change_direction_time = 0
@@ -40,7 +41,7 @@ func spawn():
 		active = true
 		check_emerge_collision()
 		direction = randf_range(0.0, 2*PI)
-		linear_velocity = Vector2(speed, 0.0).rotated(direction)
+		linear_velocity = Vector2(randf_range(min_speed, max_speed), 0.0).rotated(direction)
 		$DizzyMoleAnims.flip_h = linear_velocity.x < 0
 		timed_life = max_timed_life
 		change_direction_time = randi_range(min_change_direction_time, max_change_direction_time)
@@ -95,7 +96,7 @@ func on_fight(opponent):
 # Dizzy moles tend to wander about with no consistency.
 func change_direction():
 	direction = randf_range(0.0, 2*PI)
-	linear_velocity = Vector2(speed, 0.0).rotated(direction)
+	linear_velocity = Vector2(randf_range(min_speed, max_speed), 0.0).rotated(direction)
 	$DizzyMoleAnims.flip_h = linear_velocity.x < 0
 	change_direction_time = randi_range(min_change_direction_time, max_change_direction_time)
 
