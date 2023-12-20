@@ -18,7 +18,15 @@ const guide_page_paths = [
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	init_pages()
-	if guide_pages.size() > 0: guide_pages[0].show()
+	if guide_pages.size() > 0:
+		guide_pages[0].show()
+		$CurrentPage.text = str(guide_page_cursor + 1)
+		$MaxPage.text = str(guide_pages.size())
+	else:
+		$CurrentPage.hide()
+		$PageSlash.hide()
+		$CloseButton.hide()
+		$LeftButton.hide()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -39,6 +47,7 @@ func look_left():
 	guide_page_cursor -= 1
 	if guide_page_cursor < 0: guide_page_cursor = guide_pages.size() - 1
 	guide_pages[guide_page_cursor].show()
+	$CurrentPage.text = str(guide_page_cursor + 1)
 
 
 func look_right():
@@ -46,6 +55,7 @@ func look_right():
 	guide_page_cursor += 1
 	if guide_page_cursor >= guide_pages.size(): guide_page_cursor = 0
 	guide_pages[guide_page_cursor].show()
+	$CurrentPage.text = str(guide_page_cursor + 1)
 
 
 func _on_close_button_pressed():

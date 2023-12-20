@@ -18,7 +18,15 @@ const goon_page_paths = [
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	init_pages()
-	if goon_pages.size() > 0: goon_pages[0].show()
+	if goon_pages.size() > 0:
+		goon_pages[goon_page_cursor].show()
+		$CurrentPage.text = str(goon_page_cursor + 1)
+		$MaxPage.text = str(goon_pages.size())
+	else:
+		$CurrentPage.hide()
+		$PageSlash.hide()
+		$CloseButton.hide()
+		$LeftButton.hide()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -44,6 +52,7 @@ func look_left():
 	goon_page_cursor -= 1
 	if goon_page_cursor < 0: goon_page_cursor = goon_pages.size() - 1
 	goon_pages[goon_page_cursor].show()
+	$CurrentPage.text = str(goon_page_cursor + 1)
 
 
 func look_right():
@@ -51,6 +60,7 @@ func look_right():
 	goon_page_cursor += 1
 	if goon_page_cursor >= goon_pages.size(): goon_page_cursor = 0
 	goon_pages[goon_page_cursor].show()
+	$CurrentPage.text = str(goon_page_cursor + 1)
 
 
 func _on_left_button_pressed():
