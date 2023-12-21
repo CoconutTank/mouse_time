@@ -160,7 +160,7 @@ func update_cheese_counter(cheese : int):
 func update_vibe_display(vibes : int):
 	if vibes <= knock_out_limit:
 		$MouseVibesAnims.play("mouse_knockout")
-		$MouseVibesDisplay.text = "KO!"
+		$MouseVibesDisplay.text = str(vibes)
 		nuclear_knockout_detected = true
 		return
 	if vibes >= xtreme_vibe_limit:

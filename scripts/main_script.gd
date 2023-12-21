@@ -219,6 +219,8 @@ func _on_player_mouse_mouse_goes_to_sleep():
 
 
 func _on_player_mouse_mouse_is_knocked_out():
+	# One more update before it's all over
+	$HUD.update_vibe_display($PlayerMouse.vibes)
 	game_over()
 	# These status flips in the lines underneath are strewn about.
 	# They should always be called for any kind of game over event.

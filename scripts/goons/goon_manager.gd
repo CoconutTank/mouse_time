@@ -62,7 +62,7 @@ func init_goon_spawn_details():
 	# Fighty Lobster spawning details
 	goon_spawn_delay[GOON_TYPE.FIGHTY_LOBSTER] = 9
 	goon_ongoing_spawn_delay[GOON_TYPE.FIGHTY_LOBSTER] = 4
-	goon_max_spawn_count[GOON_TYPE.FIGHTY_LOBSTER] = 4
+	goon_max_spawn_count[GOON_TYPE.FIGHTY_LOBSTER] = 5
 
 
 func init_fight_cloud_anims():
