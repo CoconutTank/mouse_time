@@ -1,5 +1,5 @@
 class_name GoonManager
-extends Node
+extends Node2D
 
 
 signal goon_tick

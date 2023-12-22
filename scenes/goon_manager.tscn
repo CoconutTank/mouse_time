@@ -2,7 +2,8 @@
 
 [ext_resource type="Script" path="res://scripts/goons/goon_manager.gd" id="1_bv3y5"]
 
-[node name="GoonManager" type="Node"]
+[node name="GoonManager" type="Node2D"]
+y_sort_enabled = true
 script = ExtResource("1_bv3y5")
 
 [node name="GoonTimer" type="Timer" parent="."]
